@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cyyt8eo8ch6l5"]
+[gd_scene load_steps=27 format=3 uid="uid://cyyt8eo8ch6l5"]
 
 [ext_resource type="Script" uid="uid://dmapdb801rdsa" path="res://scripts/game_manager.gd" id="1_7mycd"]
 [ext_resource type="PackedScene" uid="uid://dignp846out3w" path="res://scenes/bubbles/bubble.tscn" id="2_0xm2m"]
@@ -31,6 +31,40 @@ size = Vector2(57, 19)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1bvp3"]
 size = Vector2(62, 161)
+
+[sub_resource type="Curve" id="Curve_w48qg"]
+_data = [Vector2(0, 0.0898877), 0.0, 0.0, 0, 0, Vector2(0.126904, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_vivmo"]
+curve = SubResource("Curve_w48qg")
+
+[sub_resource type="Curve" id="Curve_ycdy4"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.449438), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_w48qg"]
+curve = SubResource("Curve_ycdy4")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ycdy4"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(25, 5, 1)
+direction = Vector3(0, -1, 0)
+spread = 2.064
+initial_velocity_min = 225.53
+initial_velocity_max = 272.33
+gravity = Vector3(0, 10, 0)
+damping_min = 2.0
+damping_max = 5.0
+scale_min = 3.0
+scale_max = 5.0
+scale_curve = SubResource("CurveTexture_w48qg")
+color = Color(0.494118, 0.847059, 0.980392, 0.729412)
+alpha_curve = SubResource("CurveTexture_vivmo")
+turbulence_enabled = true
+turbulence_noise_strength = 0.5
+turbulence_noise_scale = 2.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h2yge"]
 size = Vector2(46, 151)
@@ -178,6 +212,10 @@ metadata/_edit_group_ = true
 position = Vector2(0, -23.5)
 shape = SubResource("RectangleShape2D_1bvp3")
 
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Level/Fans/Wind Center"]
+position = Vector2(0, 53.11)
+process_material = SubResource("ParticleProcessMaterial_ycdy4")
+
 [node name="Wind TR" type="Area2D" parent="Level/Fans"]
 position = Vector2(216, -59)
 collision_layer = 257
@@ -189,6 +227,11 @@ metadata/_edit_group_ = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Fans/Wind TR"]
 position = Vector2(0, -7)
 shape = SubResource("RectangleShape2D_h2yge")
+
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="Level/Fans/Wind TR"]
+position = Vector2(-16.645, -81.01)
+rotation = 2.94088
+process_material = SubResource("ParticleProcessMaterial_ycdy4")
 
 [node name="Wind TL" type="Area2D" parent="Level/Fans"]
 position = Vector2(-208, -61)
@@ -202,6 +245,11 @@ metadata/_edit_group_ = true
 position = Vector2(-8, -7)
 shape = SubResource("RectangleShape2D_h2yge")
 
+[node name="GPUParticles2D3" type="GPUParticles2D" parent="Level/Fans/Wind TL"]
+position = Vector2(3.4, -80.28)
+rotation = 3.34231
+process_material = SubResource("ParticleProcessMaterial_ycdy4")
+
 [node name="Wind BL" type="Area2D" parent="Level/Fans"]
 position = Vector2(-237, 76)
 collision_layer = 257
@@ -214,6 +262,11 @@ metadata/_edit_group_ = true
 position = Vector2(-3.5, 4)
 shape = SubResource("RectangleShape2D_lquwl")
 
+[node name="GPUParticles2D4" type="GPUParticles2D" parent="Level/Fans/Wind BL"]
+position = Vector2(-37.04, 3.615)
+rotation = 1.5708
+process_material = SubResource("ParticleProcessMaterial_ycdy4")
+
 [node name="Wind BR" type="Area2D" parent="Level/Fans"]
 position = Vector2(243, 74)
 collision_layer = 257
@@ -225,6 +278,11 @@ metadata/_edit_group_ = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Fans/Wind BR"]
 position = Vector2(-3.5, 4)
 shape = SubResource("RectangleShape2D_lquwl")
+
+[node name="GPUParticles2D5" type="GPUParticles2D" parent="Level/Fans/Wind BR"]
+position = Vector2(29.14, 5.505)
+rotation = -1.5708
+process_material = SubResource("ParticleProcessMaterial_ycdy4")
 
 [node name="P1 Spawn" type="Node2D" parent="."]
 position = Vector2(145, 9)
