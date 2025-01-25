@@ -96,7 +96,9 @@ texture = ExtResource("3_ycdy4")
 [node name="BubbleSpawner" type="Node2D" parent="."]
 position = Vector2(-10, 143)
 script = ExtResource("2_h2yge")
-bubble_object = Array[PackedScene]([ExtResource("2_0xm2m"), ExtResource("4_7mycd"), ExtResource("5_5vw27"), ExtResource("6_kek77")])
+p0_life_object = ExtResource("5_5vw27")
+p1_life_object = ExtResource("6_kek77")
+bubble_objects = Array[PackedScene]([ExtResource("2_0xm2m"), ExtResource("4_7mycd")])
 bubble_cap = 10000
 
 [node name="Timer" type="Timer" parent="."]
