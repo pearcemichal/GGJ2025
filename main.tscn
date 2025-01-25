@@ -1,28 +1,89 @@
-[gd_scene load_steps=4 format=3 uid="uid://cyyt8eo8ch6l5"]
+[gd_scene load_steps=8 format=3 uid="uid://cyyt8eo8ch6l5"]
 
+[ext_resource type="PackedScene" uid="uid://dignp846out3w" path="res://bubble.tscn" id="2_0xm2m"]
 [ext_resource type="Script" uid="uid://cp71ijqdbc6kp" path="res://bubble_spawner.gd" id="2_h2yge"]
+[ext_resource type="Script" uid="uid://burb0fept261t" path="res://wind.gd" id="3_h2yge"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_7dm0k"]
 normal = Vector2(0, 1)
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ig7tw"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0xm2m"]
+size = Vector2(158, 14)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h2yge"]
+size = Vector2(62, 95)
+
 [node name="Main" type="Node2D"]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="World" type="Node2D" parent="."]
+
+[node name="Top Bound" type="StaticBody2D" parent="World"]
 position = Vector2(0, -165)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Top Bound"]
 shape = SubResource("WorldBoundaryShape2D_7dm0k")
 
-[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+[node name="Bottom Bound" type="StaticBody2D" parent="World"]
 position = Vector2(0, 159)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Bottom Bound"]
 shape = SubResource("WorldBoundaryShape2D_ig7tw")
 
 [node name="BubbleSpawner" type="Node2D" parent="."]
+position = Vector2(0, 140)
 script = ExtResource("2_h2yge")
+bubble_object = ExtResource("2_0xm2m")
+bubble_cap = 10000
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[node name="Level" type="Node2D" parent="."]
+
+[node name="Platform" type="StaticBody2D" parent="Level"]
+position = Vector2(-140, 52)
+metadata/_edit_group_ = true
+
+[node name="ColorRect" type="ColorRect" parent="Level/Platform"]
+offset_left = -80.0
+offset_top = -7.0
+offset_right = 78.0
+offset_bottom = 7.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Platform"]
+position = Vector2(-1, 0)
+shape = SubResource("RectangleShape2D_0xm2m")
+
+[node name="Platform2" type="StaticBody2D" parent="Level"]
+position = Vector2(138, 52)
+metadata/_edit_group_ = true
+
+[node name="ColorRect" type="ColorRect" parent="Level/Platform2"]
+offset_left = -80.0
+offset_top = -7.0
+offset_right = 78.0
+offset_bottom = 7.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Platform2"]
+position = Vector2(-1, 0)
+shape = SubResource("RectangleShape2D_0xm2m")
+
+[node name="Wind" type="Area2D" parent="Level"]
+position = Vector2(0, 141)
+script = ExtResource("3_h2yge")
+wind_force = Vector2(0, -5)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Wind"]
+position = Vector2(0, -23.5)
+shape = SubResource("RectangleShape2D_h2yge")
+
+[connection signal="timeout" from="Timer" to="BubbleSpawner" method="_on_timer_timeout"]
+[connection signal="body_entered" from="Level/Wind" to="Level/Wind" method="_on_body_entered"]
+[connection signal="body_exited" from="Level/Wind" to="Level/Wind" method="_on_body_exited"]
