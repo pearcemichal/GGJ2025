@@ -1,10 +1,10 @@
-[gd_scene load_steps=62 format=3 uid="uid://cyyt8eo8ch6l5"]
+[gd_scene load_steps=71 format=3 uid="uid://cyyt8eo8ch6l5"]
 
 [ext_resource type="Script" uid="uid://dmapdb801rdsa" path="res://scripts/game_manager.gd" id="1_7mycd"]
 [ext_resource type="PackedScene" uid="uid://dignp846out3w" path="res://scenes/bubbles/bubble.tscn" id="2_0xm2m"]
 [ext_resource type="Texture2D" uid="uid://ckqkwmpjiw3ve" path="res://assets/Sprites/Background.png" id="2_dg77c"]
 [ext_resource type="Script" uid="uid://cp71ijqdbc6kp" path="res://scripts/bubble_spawner.gd" id="2_h2yge"]
-[ext_resource type="Script" path="res://critter_manager.gd" id="3_2cqfq"]
+[ext_resource type="Script" uid="uid://ctfctluf718j3" path="res://critter_manager.gd" id="3_2cqfq"]
 [ext_resource type="Script" uid="uid://burb0fept261t" path="res://scripts/wind.gd" id="3_h2yge"]
 [ext_resource type="Texture2D" uid="uid://crujns8k6cu67" path="res://assets/lightshaft.png" id="3_yaehf"]
 [ext_resource type="Texture2D" uid="uid://bulyagxqyyk65" path="res://assets/Sprites/BG Ship Interior.png" id="3_ycdy4"]
@@ -18,6 +18,8 @@
 [ext_resource type="Texture2D" uid="uid://dporckk3vymtl" path="res://assets/Sprites/fan_sprite.png" id="9_074og"]
 [ext_resource type="PackedScene" uid="uid://dhtfw5dghpq1q" path="res://scenes/bubbles/loot_bubble_box.tscn" id="9_ycdy4"]
 [ext_resource type="Script" uid="uid://2sdtj4vioo1" path="res://scripts/player_ui.gd" id="10_4c57u"]
+[ext_resource type="Texture2D" uid="uid://brep1ihy2hsce" path="res://assets/Sprites/Health_Shrimp.webp" id="19_cegan"]
+[ext_resource type="FontFile" uid="uid://d0dx4obxytsvf" path="res://assets/Fonts/Sauce Barbe.otf" id="20_82xsv"]
 
 [sub_resource type="Curve" id="Curve_074og"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.345178, 0.191011), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -505,6 +507,43 @@ size = Vector2(77, 19)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kek77"]
 size = Vector2(57, 19)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_48xfa"]
+atlas = ExtResource("19_cegan")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8isll"]
+atlas = ExtResource("19_cegan")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qsp4k"]
+atlas = ExtResource("19_cegan")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kq58d"]
+atlas = ExtResource("19_cegan")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_getpj"]
+bg_color = Color(0.365876, 0.331602, 0.151966, 0.635294)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.90818, 0.780022, 0.423926, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="LabelSettings" id="LabelSettings_ryguw"]
+font = ExtResource("20_82xsv")
+font_size = 24
+font_color = Color(0.920833, 0.920834, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_82xsv"]
+font = ExtResource("20_82xsv")
+font_color = Color(0.739641, 0.739641, 1.54018e-06, 1)
+
 [node name="Main" type="Node2D"]
 script = ExtResource("1_7mycd")
 
@@ -847,13 +886,13 @@ wait_time = 0.5
 autostart = true
 
 [node name="P1 Spawn" type="Node2D" parent="."]
-position = Vector2(145, 9)
+position = Vector2(-191.44, -69.36)
 metadata/_edit_group_ = true
 
 [node name="Player" parent="P1 Spawn" instance=ExtResource("5_lquwl")]
 
 [node name="P2 Spawn" type="Node2D" parent="."]
-position = Vector2(-154, 10)
+position = Vector2(183.615, -69.34)
 metadata/_edit_group_ = true
 
 [node name="Player" parent="P2 Spawn" instance=ExtResource("5_lquwl")]
@@ -881,54 +920,288 @@ size_flags_horizontal = 3
 size_flags_vertical = 10
 
 [node name="HBox" type="HBoxContainer" parent="UI"]
-layout_mode = 1
-anchors_preset = 8
+layout_mode = 2
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -259.0
+offset_left = -245.0
 offset_top = -16.0
-offset_right = 259.0
-offset_bottom = 11.0
+offset_right = 245.0
+offset_bottom = 9.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="P1Life" type="Panel" parent="UI/HBox"]
+[node name="LifeP0" type="Control" parent="UI/HBox"]
 layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("10_4c57u")
 
-[node name="Label" type="Label" parent="UI/HBox/P1Life"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "P1|10"
-horizontal_alignment = 1
+[node name="Timer" type="Timer" parent="UI/HBox/LifeP0"]
 
-[node name="_spacer" type="Panel" parent="UI/HBox"]
-custom_minimum_size = Vector2(151.44, 0)
+[node name="HealthBar" type="HBoxContainer" parent="UI/HBox/LifeP0"]
+layout_mode = 2
+offset_right = 148.0
+offset_bottom = 23.0
+
+[node name="M1" type="MarginContainer" parent="UI/HBox/LifeP0/HealthBar"]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 2
+theme_override_constants/margin_left = 0
+
+[node name="TextureButton" type="TextureButton" parent="UI/HBox/LifeP0/HealthBar/M1"]
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_48xfa")
+texture_disabled = SubResource("AtlasTexture_8isll")
+ignore_texture_size = true
+stretch_mode = 3
+
+[node name="M2" type="MarginContainer" parent="UI/HBox/LifeP0/HealthBar"]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 2
+theme_override_constants/margin_top = 8
+
+[node name="TextureButton" type="TextureButton" parent="UI/HBox/LifeP0/HealthBar/M2"]
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_48xfa")
+texture_disabled = SubResource("AtlasTexture_8isll")
+ignore_texture_size = true
+stretch_mode = 3
+
+[node name="M3" type="MarginContainer" parent="UI/HBox/LifeP0/HealthBar"]
+custom_minimum_size = Vector2(15, 0)
 layout_mode = 2
 
-[node name="P2Life" type="Panel" parent="UI/HBox"]
+[node name="TextureButton" type="TextureButton" parent="UI/HBox/LifeP0/HealthBar/M3"]
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_48xfa")
+texture_disabled = SubResource("AtlasTexture_8isll")
+ignore_texture_size = true
+stretch_mode = 3
+
+[node name="M4" type="MarginContainer" parent="UI/HBox/LifeP0/HealthBar"]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 2
+theme_override_constants/margin_top = 8
+
+[node name="TextureButton" type="TextureButton" parent="UI/HBox/LifeP0/HealthBar/M4"]
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_48xfa")
+texture_disabled = SubResource("AtlasTexture_8isll")
+ignore_texture_size = true
+stretch_mode = 3
+
+[node name="M5" type="MarginContainer" parent="UI/HBox/LifeP0/HealthBar"]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 2
+
+[node name="TextureButton" type="TextureButton" parent="UI/HBox/LifeP0/HealthBar/M5"]
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_48xfa")
+texture_disabled = SubResource("AtlasTexture_8isll")
+ignore_texture_size = true
+stretch_mode = 3
+
+[node name="M6" type="MarginContainer" parent="UI/HBox/LifeP0/HealthBar"]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 2
+theme_override_constants/margin_top = 8
+
+[node name="TextureButton" type="TextureButton" parent="UI/HBox/LifeP0/HealthBar/M6"]
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_48xfa")
+texture_disabled = SubResource("AtlasTexture_8isll")
+ignore_texture_size = true
+stretch_mode = 3
+
+[node name="M7" type="MarginContainer" parent="UI/HBox/LifeP0/HealthBar"]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 2
+
+[node name="TextureButton" type="TextureButton" parent="UI/HBox/LifeP0/HealthBar/M7"]
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_48xfa")
+texture_disabled = SubResource("AtlasTexture_8isll")
+ignore_texture_size = true
+stretch_mode = 3
+
+[node name="M8" type="MarginContainer" parent="UI/HBox/LifeP0/HealthBar"]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 2
+theme_override_constants/margin_top = 8
+
+[node name="TextureButton" type="TextureButton" parent="UI/HBox/LifeP0/HealthBar/M8"]
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_48xfa")
+texture_disabled = SubResource("AtlasTexture_8isll")
+ignore_texture_size = true
+stretch_mode = 3
+
+[node name="_spacer" type="Panel" parent="UI/HBox"]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+
+[node name="LifeP1" type="Control" parent="UI/HBox"]
 layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("10_4c57u")
 player_id = 1
 
-[node name="Label" type="Label" parent="UI/HBox/P2Life"]
+[node name="Timer" type="Timer" parent="UI/HBox/LifeP1"]
+
+[node name="HealthBar" type="HBoxContainer" parent="UI/HBox/LifeP1"]
+layout_mode = 2
+offset_right = 148.0
+offset_bottom = 23.0
+
+[node name="M1" type="MarginContainer" parent="UI/HBox/LifeP1/HealthBar"]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 2
+theme_override_constants/margin_left = 0
+
+[node name="TextureButton" type="TextureButton" parent="UI/HBox/LifeP1/HealthBar/M1"]
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_qsp4k")
+texture_disabled = SubResource("AtlasTexture_kq58d")
+ignore_texture_size = true
+stretch_mode = 3
+
+[node name="M2" type="MarginContainer" parent="UI/HBox/LifeP1/HealthBar"]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 2
+theme_override_constants/margin_top = 8
+
+[node name="TextureButton" type="TextureButton" parent="UI/HBox/LifeP1/HealthBar/M2"]
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_qsp4k")
+texture_disabled = SubResource("AtlasTexture_kq58d")
+ignore_texture_size = true
+stretch_mode = 3
+
+[node name="M3" type="MarginContainer" parent="UI/HBox/LifeP1/HealthBar"]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 2
+
+[node name="TextureButton" type="TextureButton" parent="UI/HBox/LifeP1/HealthBar/M3"]
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_qsp4k")
+texture_disabled = SubResource("AtlasTexture_kq58d")
+ignore_texture_size = true
+stretch_mode = 3
+
+[node name="M4" type="MarginContainer" parent="UI/HBox/LifeP1/HealthBar"]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 2
+theme_override_constants/margin_top = 8
+
+[node name="TextureButton" type="TextureButton" parent="UI/HBox/LifeP1/HealthBar/M4"]
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_qsp4k")
+texture_disabled = SubResource("AtlasTexture_kq58d")
+ignore_texture_size = true
+stretch_mode = 3
+
+[node name="M5" type="MarginContainer" parent="UI/HBox/LifeP1/HealthBar"]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 2
+
+[node name="TextureButton" type="TextureButton" parent="UI/HBox/LifeP1/HealthBar/M5"]
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_qsp4k")
+texture_disabled = SubResource("AtlasTexture_kq58d")
+ignore_texture_size = true
+stretch_mode = 3
+
+[node name="M6" type="MarginContainer" parent="UI/HBox/LifeP1/HealthBar"]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 2
+theme_override_constants/margin_top = 8
+
+[node name="TextureButton" type="TextureButton" parent="UI/HBox/LifeP1/HealthBar/M6"]
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_qsp4k")
+texture_disabled = SubResource("AtlasTexture_kq58d")
+ignore_texture_size = true
+stretch_mode = 3
+
+[node name="M7" type="MarginContainer" parent="UI/HBox/LifeP1/HealthBar"]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 2
+
+[node name="TextureButton" type="TextureButton" parent="UI/HBox/LifeP1/HealthBar/M7"]
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_qsp4k")
+texture_disabled = SubResource("AtlasTexture_kq58d")
+ignore_texture_size = true
+stretch_mode = 3
+
+[node name="M8" type="MarginContainer" parent="UI/HBox/LifeP1/HealthBar"]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 2
+theme_override_constants/margin_top = 8
+
+[node name="TextureButton" type="TextureButton" parent="UI/HBox/LifeP1/HealthBar/M8"]
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_qsp4k")
+texture_disabled = SubResource("AtlasTexture_kq58d")
+ignore_texture_size = true
+stretch_mode = 3
+
+[node name="VictoryScreen" type="Panel" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -251.0
+offset_top = -129.0
+offset_right = 251.0
+offset_bottom = 85.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_getpj")
+
+[node name="MarginContainer" type="MarginContainer" parent="VictoryScreen"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "\"\""
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VictoryScreen/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="EndMessage" type="Label" parent="VictoryScreen/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "PLAYER 2 HAS BEEN KRILLED!"
+label_settings = SubResource("LabelSettings_ryguw")
 horizontal_alignment = 1
+
+[node name="Message2" type="Label" parent="VictoryScreen/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "How embarassing for them"
+label_settings = SubResource("LabelSettings_82xsv")
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="VictoryScreen/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("20_82xsv")
+text = "PRESS Y FOR NEW GAME"
 
 [connection signal="timeout" from="Background/Critters/Timer" to="Background/Critters" method="_on_timer_timeout"]
 [connection signal="body_entered" from="Boundary/Killzone" to="." method="_on_killzone_body_entered"]
 [connection signal="timeout" from="Level/Timer" to="Level/BubbleSpawner" method="_on_timer_timeout"]
+[connection signal="timeout" from="UI/HBox/LifeP0/Timer" to="UI/HBox/LifeP0" method="_on_timer_timeout"]
+[connection signal="timeout" from="UI/HBox/LifeP1/Timer" to="UI/HBox/LifeP1" method="_on_timer_timeout"]

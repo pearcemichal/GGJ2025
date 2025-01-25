@@ -1,0 +1,122 @@
+[gd_scene load_steps=5 format=3 uid="uid://0dwp47jop0f4"]
+
+[ext_resource type="Script" uid="uid://2sdtj4vioo1" path="res://scripts/player_ui.gd" id="1_jkj6h"]
+[ext_resource type="Texture2D" uid="uid://brep1ihy2hsce" path="res://assets/Sprites/Health_Shrimp.webp" id="2_sk4pr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_48xfa"]
+atlas = ExtResource("2_sk4pr")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8isll"]
+atlas = ExtResource("2_sk4pr")
+region = Rect2(64, 0, 64, 64)
+
+[node name="P1Life" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 148.0
+offset_bottom = 23.0
+size_flags_horizontal = 3
+script = ExtResource("1_jkj6h")
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="HealthBar" type="HBoxContainer" parent="."]
+layout_mode = 2
+offset_right = 148.0
+offset_bottom = 23.0
+
+[node name="M1" type="MarginContainer" parent="HealthBar"]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 2
+theme_override_constants/margin_left = 0
+
+[node name="TextureButton" type="TextureButton" parent="HealthBar/M1"]
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_48xfa")
+texture_disabled = SubResource("AtlasTexture_8isll")
+ignore_texture_size = true
+stretch_mode = 3
+
+[node name="M2" type="MarginContainer" parent="HealthBar"]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 2
+theme_override_constants/margin_top = 8
+
+[node name="TextureButton" type="TextureButton" parent="HealthBar/M2"]
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_48xfa")
+texture_disabled = SubResource("AtlasTexture_8isll")
+ignore_texture_size = true
+stretch_mode = 3
+
+[node name="M3" type="MarginContainer" parent="HealthBar"]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 2
+
+[node name="TextureButton" type="TextureButton" parent="HealthBar/M3"]
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_48xfa")
+texture_disabled = SubResource("AtlasTexture_8isll")
+ignore_texture_size = true
+stretch_mode = 3
+
+[node name="M4" type="MarginContainer" parent="HealthBar"]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 2
+theme_override_constants/margin_top = 8
+
+[node name="TextureButton" type="TextureButton" parent="HealthBar/M4"]
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_48xfa")
+texture_disabled = SubResource("AtlasTexture_8isll")
+ignore_texture_size = true
+stretch_mode = 3
+
+[node name="M5" type="MarginContainer" parent="HealthBar"]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 2
+
+[node name="TextureButton" type="TextureButton" parent="HealthBar/M5"]
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_48xfa")
+texture_disabled = SubResource("AtlasTexture_8isll")
+ignore_texture_size = true
+stretch_mode = 3
+
+[node name="M6" type="MarginContainer" parent="HealthBar"]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 2
+theme_override_constants/margin_top = 8
+
+[node name="TextureButton" type="TextureButton" parent="HealthBar/M6"]
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_48xfa")
+texture_disabled = SubResource("AtlasTexture_8isll")
+ignore_texture_size = true
+stretch_mode = 3
+
+[node name="M7" type="MarginContainer" parent="HealthBar"]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 2
+
+[node name="TextureButton" type="TextureButton" parent="HealthBar/M7"]
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_48xfa")
+texture_disabled = SubResource("AtlasTexture_8isll")
+ignore_texture_size = true
+stretch_mode = 3
+
+[node name="M8" type="MarginContainer" parent="HealthBar"]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 2
+theme_override_constants/margin_top = 8
+
+[node name="TextureButton" type="TextureButton" parent="HealthBar/M8"]
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_48xfa")
+texture_disabled = SubResource("AtlasTexture_8isll")
+ignore_texture_size = true
+stretch_mode = 3
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
