@@ -1,0 +1,318 @@
+[gd_scene load_steps=21 format=3 uid="uid://cyyt8eo8ch6l5"]
+
+[ext_resource type="Script" uid="uid://dmapdb801rdsa" path="res://scripts/game_manager.gd" id="1_7mycd"]
+[ext_resource type="PackedScene" uid="uid://dignp846out3w" path="res://scenes/bubbles/bubble.tscn" id="2_0xm2m"]
+[ext_resource type="Texture2D" uid="uid://ckqkwmpjiw3ve" path="res://assets/Sprites/Background.png" id="2_dg77c"]
+[ext_resource type="Script" uid="uid://cp71ijqdbc6kp" path="res://scripts/bubble_spawner.gd" id="2_h2yge"]
+[ext_resource type="Script" uid="uid://burb0fept261t" path="res://scripts/wind.gd" id="3_h2yge"]
+[ext_resource type="Texture2D" uid="uid://bulyagxqyyk65" path="res://assets/Sprites/BG Ship Interior.png" id="3_ycdy4"]
+[ext_resource type="PackedScene" uid="uid://goffmnls2sjg" path="res://scenes/bubbles/jump_bubble.tscn" id="4_7mycd"]
+[ext_resource type="Texture2D" uid="uid://cc8ng7ejyhbpo" path="res://assets/Sprites/Main Stage.png" id="4_w48qg"]
+[ext_resource type="PackedScene" uid="uid://dvfbvbqrvwhrk" path="res://scenes/bubbles/life_bubble_p0.tscn" id="5_5vw27"]
+[ext_resource type="PackedScene" uid="uid://cmlwa3jf6pcur" path="res://scenes/player.tscn" id="5_lquwl"]
+[ext_resource type="PackedScene" uid="uid://xslr5vke8uwa" path="res://scenes/bubbles/life_bubble_p1.tscn" id="6_kek77"]
+[ext_resource type="Script" uid="uid://2sdtj4vioo1" path="res://scripts/player_ui.gd" id="10_4c57u"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_7dm0k"]
+normal = Vector2(0, 1)
+distance = 3.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ig7tw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_272bh"]
+size = Vector2(535, 19)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0xm2m"]
+size = Vector2(77, 19)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kek77"]
+size = Vector2(57, 19)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1bvp3"]
+size = Vector2(62, 161)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h2yge"]
+size = Vector2(46, 151)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lquwl"]
+size = Vector2(55, 52)
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_7mycd")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
+
+[node name="World" type="Node2D" parent="."]
+
+[node name="Top Bound" type="StaticBody2D" parent="World"]
+position = Vector2(0, -144)
+collision_layer = 257
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Top Bound"]
+shape = SubResource("WorldBoundaryShape2D_7dm0k")
+
+[node name="Bottom Bound" type="StaticBody2D" parent="World"]
+position = Vector2(0, 163)
+collision_layer = 257
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Bottom Bound"]
+shape = SubResource("WorldBoundaryShape2D_ig7tw")
+
+[node name="Left Bound" type="StaticBody2D" parent="World"]
+position = Vector2(19, 204)
+collision_layer = 257
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Left Bound"]
+position = Vector2(-288, -203)
+rotation = 1.5708
+shape = SubResource("WorldBoundaryShape2D_ig7tw")
+
+[node name="Right Bound" type="StaticBody2D" parent="World"]
+position = Vector2(-20, 204)
+collision_layer = 257
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Right Bound"]
+position = Vector2(288, -203)
+rotation = -1.5708
+shape = SubResource("WorldBoundaryShape2D_ig7tw")
+
+[node name="Killzone" type="Area2D" parent="World"]
+position = Vector2(0, 181)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Killzone"]
+position = Vector2(0.5, -85.5)
+shape = SubResource("RectangleShape2D_272bh")
+
+[node name="Ocean BG" type="Sprite2D" parent="World"]
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("2_dg77c")
+metadata/_edit_lock_ = true
+
+[node name="Ship Interior" type="Sprite2D" parent="World"]
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("3_ycdy4")
+
+[node name="BubbleSpawner" type="Node2D" parent="."]
+position = Vector2(-10, 143)
+script = ExtResource("2_h2yge")
+p0_life_object = ExtResource("5_5vw27")
+p1_life_object = ExtResource("6_kek77")
+bubble_objects = Array[PackedScene]([ExtResource("2_0xm2m"), ExtResource("4_7mycd")])
+bubble_cap = 10000
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[node name="Level" type="Node2D" parent="."]
+
+[node name="Platform" type="StaticBody2D" parent="Level"]
+position = Vector2(-191, -37)
+collision_layer = 257
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Platform"]
+position = Vector2(-1, 0)
+shape = SubResource("RectangleShape2D_0xm2m")
+
+[node name="Platform2" type="StaticBody2D" parent="Level"]
+position = Vector2(181, -37)
+collision_layer = 257
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Platform2"]
+position = Vector2(1.5, 0)
+shape = SubResource("RectangleShape2D_0xm2m")
+
+[node name="Platform3" type="StaticBody2D" parent="Level"]
+position = Vector2(-152, 39)
+collision_layer = 257
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Platform3"]
+position = Vector2(-1.5, 0.5)
+shape = SubResource("RectangleShape2D_kek77")
+
+[node name="Platform4" type="StaticBody2D" parent="Level"]
+position = Vector2(-66, 1)
+collision_layer = 257
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Platform4"]
+position = Vector2(-1.5, 0.5)
+shape = SubResource("RectangleShape2D_kek77")
+
+[node name="Platform5" type="StaticBody2D" parent="Level"]
+position = Vector2(49, 1)
+collision_layer = 257
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Platform5"]
+position = Vector2(-1.5, 0.5)
+shape = SubResource("RectangleShape2D_kek77")
+
+[node name="Platform6" type="StaticBody2D" parent="Level"]
+position = Vector2(146, 39)
+collision_layer = 257
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Platform6"]
+position = Vector2(-1.5, 0.5)
+shape = SubResource("RectangleShape2D_kek77")
+
+[node name="Fans" type="Node2D" parent="Level"]
+
+[node name="Wind Center" type="Area2D" parent="Level/Fans"]
+position = Vector2(-10, 106)
+collision_layer = 257
+collision_mask = 257
+script = ExtResource("3_h2yge")
+wind_force = Vector2(0, -8)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Fans/Wind Center"]
+position = Vector2(0, -23.5)
+shape = SubResource("RectangleShape2D_1bvp3")
+
+[node name="Wind TR" type="Area2D" parent="Level/Fans"]
+position = Vector2(244, -60)
+collision_layer = 257
+collision_mask = 257
+script = ExtResource("3_h2yge")
+wind_force = Vector2(0, 5)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Fans/Wind TR"]
+position = Vector2(0, -7)
+shape = SubResource("RectangleShape2D_h2yge")
+
+[node name="Wind TL" type="Area2D" parent="Level/Fans"]
+position = Vector2(-237, -60)
+collision_layer = 257
+collision_mask = 257
+script = ExtResource("3_h2yge")
+wind_force = Vector2(0, 5)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Fans/Wind TL"]
+position = Vector2(-8, -7)
+shape = SubResource("RectangleShape2D_h2yge")
+
+[node name="Wind BL" type="Area2D" parent="Level/Fans"]
+position = Vector2(-237, 76)
+collision_layer = 257
+collision_mask = 257
+script = ExtResource("3_h2yge")
+wind_force = Vector2(5, 0)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Fans/Wind BL"]
+position = Vector2(-3.5, 4)
+shape = SubResource("RectangleShape2D_lquwl")
+
+[node name="Wind BR" type="Area2D" parent="Level/Fans"]
+position = Vector2(243, 74)
+collision_layer = 257
+collision_mask = 257
+script = ExtResource("3_h2yge")
+wind_force = Vector2(-5, 0)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Fans/Wind BR"]
+position = Vector2(-3.5, 4)
+shape = SubResource("RectangleShape2D_lquwl")
+
+[node name="P1 Spawn" type="Node2D" parent="."]
+position = Vector2(145, -2)
+metadata/_edit_group_ = true
+
+[node name="Player" parent="P1 Spawn" instance=ExtResource("5_lquwl")]
+
+[node name="P2 Spawn" type="Node2D" parent="."]
+position = Vector2(-151, -2)
+metadata/_edit_group_ = true
+
+[node name="Player" parent="P2 Spawn" instance=ExtResource("5_lquwl")]
+player_id = 1
+
+[node name="Main Stage" type="Sprite2D" parent="."]
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("4_w48qg")
+
+[node name="UI" type="Control" parent="."]
+custom_minimum_size = Vector2(500, 25)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -250.0
+offset_top = 108.0
+offset_right = 250.0
+offset_bottom = 158.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 10
+
+[node name="HBox" type="HBoxContainer" parent="UI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -259.0
+offset_top = -16.0
+offset_right = 259.0
+offset_bottom = 11.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="P1Life" type="Panel" parent="UI/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("10_4c57u")
+
+[node name="Label" type="Label" parent="UI/HBox/P1Life"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "P1|10"
+horizontal_alignment = 1
+
+[node name="_spacer" type="Panel" parent="UI/HBox"]
+custom_minimum_size = Vector2(151.44, 0)
+layout_mode = 2
+
+[node name="P2Life" type="Panel" parent="UI/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("10_4c57u")
+player_id = 1
+
+[node name="Label" type="Label" parent="UI/HBox/P2Life"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "\"\""
+horizontal_alignment = 1
+
+[connection signal="body_entered" from="World/Killzone" to="." method="_on_killzone_body_entered"]
+[connection signal="timeout" from="Timer" to="BubbleSpawner" method="_on_timer_timeout"]
+[connection signal="body_entered" from="Level/Fans/Wind Center" to="Level/Fans/Wind Center" method="_on_body_entered"]
+[connection signal="body_exited" from="Level/Fans/Wind Center" to="Level/Fans/Wind Center" method="_on_body_exited"]
+[connection signal="body_entered" from="Level/Fans/Wind TR" to="Level/Fans/Wind TR" method="_on_body_entered"]
+[connection signal="body_exited" from="Level/Fans/Wind TR" to="Level/Fans/Wind TR" method="_on_body_exited"]
+[connection signal="body_entered" from="Level/Fans/Wind TL" to="Level/Fans/Wind TL" method="_on_body_entered"]
+[connection signal="body_exited" from="Level/Fans/Wind TL" to="Level/Fans/Wind TL" method="_on_body_exited"]
+[connection signal="body_entered" from="Level/Fans/Wind BL" to="Level/Fans/Wind BL" method="_on_body_entered"]
+[connection signal="body_exited" from="Level/Fans/Wind BL" to="Level/Fans/Wind BL" method="_on_body_exited"]
+[connection signal="body_entered" from="Level/Fans/Wind BR" to="Level/Fans/Wind BR" method="_on_body_entered"]
+[connection signal="body_exited" from="Level/Fans/Wind BR" to="Level/Fans/Wind BR" method="_on_body_exited"]
