@@ -15,6 +15,10 @@ run/main_scene="uid://cyyt8eo8ch6l5"
 config/features=PackedStringArray("4.4")
 config/icon="res://icon.svg"
 
+[autoload]
+
+SignalBus="*res://scripts/_signal_bus.gd"
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/script-ide/plugin.cfg")
@@ -49,4 +53,5 @@ P1_slap={
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 environment/defaults/default_clear_color=Color(0.068498, 0.108171, 0.146223, 1)

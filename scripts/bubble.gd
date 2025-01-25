@@ -13,7 +13,11 @@ func _ready() -> void:
 func set_bubble_size(factor : float):
 	collision_shape_2d.scale *= factor
 	panel.scale *= factor
+	
+func pop_da_bubble():
+	SignalBus.BubblePopped.emit()
+	queue_free()
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.is_in_group("popper"):
-		queue_free()
+		pop_da_bubble()
