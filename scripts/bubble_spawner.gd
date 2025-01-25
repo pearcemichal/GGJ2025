@@ -23,7 +23,7 @@ var loot_timer = 0
 var boost_timer = 15
 var boosting : bool = false
 
-var spawning : bool = false;
+var spawning : bool = true;
 
 func _ready() -> void:
 	SignalBus.BubbleBoost.connect(_on_bubble_boost)

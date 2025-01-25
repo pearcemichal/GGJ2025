@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://dignp846out3w" path="res://scenes/bubbles/bubble.tscn" id="2_0xm2m"]
 [ext_resource type="Texture2D" uid="uid://ckqkwmpjiw3ve" path="res://assets/Sprites/Background.png" id="2_dg77c"]
 [ext_resource type="Script" uid="uid://cp71ijqdbc6kp" path="res://scripts/bubble_spawner.gd" id="2_h2yge"]
-[ext_resource type="Script" uid="uid://ctfctluf718j3" path="res://critter_manager.gd" id="3_2cqfq"]
+[ext_resource type="Script" path="res://critter_manager.gd" id="3_2cqfq"]
 [ext_resource type="Script" uid="uid://burb0fept261t" path="res://scripts/wind.gd" id="3_h2yge"]
 [ext_resource type="Texture2D" uid="uid://crujns8k6cu67" path="res://assets/lightshaft.png" id="3_yaehf"]
 [ext_resource type="Texture2D" uid="uid://bulyagxqyyk65" path="res://assets/Sprites/BG Ship Interior.png" id="3_ycdy4"]
@@ -36,22 +36,6 @@ gravity = Vector3(0, 0, 0)
 scale_max = 3.0
 color = Color(0.900128, 0.878914, 0.768575, 1)
 alpha_curve = SubResource("CurveTexture_cegan")
-
-[sub_resource type="Animation" id="Animation_w48qg"]
-resource_name = "fishman"
-length = 5.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Fishman:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(340, -98), Vector2(-341, -98)]
-}
 
 [sub_resource type="Animation" id="Animation_vivmo"]
 length = 0.001
@@ -126,22 +110,6 @@ tracks/5/keys = {
 "values": [Vector2(-302, -392)]
 }
 
-[sub_resource type="Animation" id="Animation_2cqfq"]
-resource_name = "jellyman"
-length = 8.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Jellyman Group:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.94, 2.36, 3.93667, 4.36667, 8),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(-356, 126), Vector2(-189.991, -6.907), Vector2(-151.722, 2.999), Vector2(-44.5346, -74.1214), Vector2(-14.303, -52.953), Vector2(243, -281)]
-}
-
 [sub_resource type="Animation" id="Animation_yaehf"]
 resource_name = "big_fishman"
 length = 9.0
@@ -168,6 +136,38 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 3, 9)
 }
 
+[sub_resource type="Animation" id="Animation_cegan"]
+resource_name = "big_jellyman"
+length = 9.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BigJellyman:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(384, 375), Vector2(-302, -392)]
+}
+
+[sub_resource type="Animation" id="Animation_w48qg"]
+resource_name = "fishman"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Fishman:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(340, -98), Vector2(-341, -98)]
+}
+
 [sub_resource type="Animation" id="Animation_074og"]
 resource_name = "fishman_group"
 length = 8.0
@@ -184,20 +184,20 @@ tracks/0/keys = {
 "values": [Vector2(-404.4, -77.37), Vector2(408.635, -77.37)]
 }
 
-[sub_resource type="Animation" id="Animation_cegan"]
-resource_name = "big_jellyman"
-length = 9.0
+[sub_resource type="Animation" id="Animation_2cqfq"]
+resource_name = "jellyman"
+length = 8.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("BigJellyman:position")
+tracks/0/path = NodePath("Jellyman Group:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 9),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 1.94, 2.36, 3.93667, 4.36667, 8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(384, 375), Vector2(-302, -392)]
+"values": [Vector2(-356, 126), Vector2(-189.991, -6.907), Vector2(-151.722, 2.999), Vector2(-44.5346, -74.1214), Vector2(-14.303, -52.953), Vector2(243, -281)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2cqfq"]
