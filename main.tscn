@@ -1,11 +1,13 @@
-[gd_scene load_steps=19 format=3 uid="uid://cyyt8eo8ch6l5"]
+[gd_scene load_steps=21 format=3 uid="uid://cyyt8eo8ch6l5"]
 
 [ext_resource type="Script" uid="uid://dmapdb801rdsa" path="res://scripts/game_manager.gd" id="1_7mycd"]
 [ext_resource type="PackedScene" uid="uid://dignp846out3w" path="res://scenes/bubbles/bubble.tscn" id="2_0xm2m"]
+[ext_resource type="Texture2D" uid="uid://ckqkwmpjiw3ve" path="res://assets/Sprites/Background.png" id="2_dg77c"]
 [ext_resource type="Script" uid="uid://cp71ijqdbc6kp" path="res://scripts/bubble_spawner.gd" id="2_h2yge"]
-[ext_resource type="Texture2D" uid="uid://bvvvpkn5hr1oq" path="res://assets/Fight_Glub_11.webp" id="2_kek77"]
 [ext_resource type="Script" uid="uid://burb0fept261t" path="res://scripts/wind.gd" id="3_h2yge"]
+[ext_resource type="Texture2D" uid="uid://bulyagxqyyk65" path="res://assets/Sprites/BG Ship Interior.png" id="3_ycdy4"]
 [ext_resource type="PackedScene" uid="uid://goffmnls2sjg" path="res://scenes/bubbles/jump_bubble.tscn" id="4_7mycd"]
+[ext_resource type="Texture2D" uid="uid://cc8ng7ejyhbpo" path="res://assets/Sprites/Main Stage.png" id="4_w48qg"]
 [ext_resource type="PackedScene" uid="uid://dvfbvbqrvwhrk" path="res://scenes/bubbles/life_bubble_p0.tscn" id="5_5vw27"]
 [ext_resource type="PackedScene" uid="uid://cmlwa3jf6pcur" path="res://scenes/player.tscn" id="5_lquwl"]
 [ext_resource type="PackedScene" uid="uid://xslr5vke8uwa" path="res://scenes/bubbles/life_bubble_p1.tscn" id="6_kek77"]
@@ -82,10 +84,14 @@ position = Vector2(0, 181)
 position = Vector2(0.5, -85.5)
 shape = SubResource("RectangleShape2D_272bh")
 
-[node name="Sprite2D" type="Sprite2D" parent="World"]
+[node name="Ocean BG" type="Sprite2D" parent="World"]
 scale = Vector2(1.2, 1.2)
-texture = ExtResource("2_kek77")
+texture = ExtResource("2_dg77c")
 metadata/_edit_lock_ = true
+
+[node name="Ship Interior" type="Sprite2D" parent="World"]
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("3_ycdy4")
 
 [node name="BubbleSpawner" type="Node2D" parent="."]
 position = Vector2(-10, 143)
@@ -227,6 +233,10 @@ metadata/_edit_group_ = true
 
 [node name="Player" parent="P2 Spawn" instance=ExtResource("5_lquwl")]
 player_id = 1
+
+[node name="Main Stage" type="Sprite2D" parent="."]
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("4_w48qg")
 
 [node name="UI" type="Control" parent="."]
 custom_minimum_size = Vector2(500, 25)
