@@ -222,13 +222,13 @@ position = Vector2(-3.5, 4)
 shape = SubResource("RectangleShape2D_lquwl")
 
 [node name="P1 Spawn" type="Node2D" parent="."]
-position = Vector2(145, 16)
+position = Vector2(145, -2)
 metadata/_edit_group_ = true
 
 [node name="Player" parent="P1 Spawn" instance=ExtResource("5_lquwl")]
 
 [node name="P2 Spawn" type="Node2D" parent="."]
-position = Vector2(-154, 17)
+position = Vector2(-151, -2)
 metadata/_edit_group_ = true
 
 [node name="Player" parent="P2 Spawn" instance=ExtResource("5_lquwl")]
