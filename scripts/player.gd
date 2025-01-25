@@ -7,7 +7,7 @@ extends CharacterBody2D
 
 @export var player_id : int
 @export var SPEED = 100.0
-@export var JUMP_VELOCITY = 200.0
+@export var JUMP_VELOCITY = 150.0
 
 var jump_bubble : BubbleJump
 var jump_dir : Vector2
@@ -15,8 +15,8 @@ var move_dir : Vector2
 var facing_direction : int = 1; # Set based on player 
 var jump_power_value : float
 var active_animation : AnimatedSprite2D
-var roll_rotation_speed = 0.032; #0.008 for bubble mode
-var jump_charge_speed = 0.075; # default was 0.5;
+var roll_rotation_speed = 0.05;
+var jump_charge_speed = 0.1; # default was 0.5;
 
 enum player_states { Neutral, Walk, Charge, Dive, Roll, Bubbled, BubbledCharge }
 var player_state : player_states = player_states.Neutral;
@@ -43,7 +43,7 @@ func _process(delta: float) -> void:
 		player_states.Walk:
 			update_walk_state(delta);
 		player_states.Charge:
-			update_charge();
+			update_charge(delta);
 		player_states.Dive:
 			update_dive(delta);
 		player_states.Roll:
@@ -51,7 +51,7 @@ func _process(delta: float) -> void:
 		player_states.Bubbled:
 			update_bubbled();
 		player_states.BubbledCharge:
-			update_bubbled_charge();
+			update_bubbled_charge(delta);
 			
 func _physics_process(delta: float) -> void:
 	if jump_bubble:
@@ -113,10 +113,13 @@ func enter_bubbled_charge_state() -> void:
 
 #region Update State
 func update_neutral(delta: float) -> void:
+	if jump_bubble:
+		enter_bubbled_state();
+		return;
 	if Input.is_action_pressed("P%s_jump" % player_id) && is_on_floor():
 		enter_charge_state();
 		return;
-	if abs(Input.get_joy_axis(player_id,JOY_AXIS_LEFT_X)) > 0:
+	if abs(Input.get_joy_axis(player_id,JOY_AXIS_LEFT_X)) > 0.25:
 		enter_walk_state();
 		return;
 		
@@ -124,23 +127,28 @@ func update_neutral(delta: float) -> void:
 		apply_gravity(delta);
 
 func update_walk_state(delta: float) -> void:
+	if jump_bubble:
+		enter_bubbled_state();
+		return;
 	if Input.is_action_pressed("P%s_jump" % player_id) && is_on_floor():
 		enter_charge_state();
 		return;
 	
-	if abs(Input.get_joy_axis(player_id,JOY_AXIS_LEFT_X)) <= 0:
+	if abs(Input.get_joy_axis(player_id,JOY_AXIS_LEFT_X)) <= 0.25:
 		enter_neutral_state();
 		return;
 	
 	move_dir.x = Input.get_joy_axis(player_id,JOY_AXIS_LEFT_X)
-	print(move_dir.x)
 	facing_direction = sign(move_dir.x);
 	set_sprite_flip();
 	velocity.x = move_dir.x * SPEED
 	if !is_on_floor():
 		apply_gravity(delta);
 
-func update_charge() -> void:
+func update_charge(delta: float) -> void:
+	if jump_bubble:
+		enter_bubbled_state();
+		return;
 	if Input.is_action_just_released("P%s_jump" % player_id):
 		enter_dive_state();
 		return;
@@ -148,7 +156,7 @@ func update_charge() -> void:
 	jump_dir.y = Input.get_joy_axis(player_id,JOY_AXIS_RIGHT_Y)
 	jump_power.rotation = get_angle_to(global_position + jump_dir) + 80
 	if (jump_power_value < jump_power.max_value):
-		jump_power_value += jump_charge_speed
+		jump_power_value += jump_charge_speed * delta * 100;
 		jump_power.value = jump_power_value
 	facing_direction = sign(jump_dir.x);
 	set_sprite_flip();
@@ -166,8 +174,11 @@ func update_dive(delta: float) -> void:
 		enter_roll_state();
 		return;
 	
-	# TODO[WP]: rotate based on direction
-	active_animation.rotation = velocity.angle();
+	#facing left
+	if facing_direction == -1:
+		active_animation.rotation = deg_to_rad(rad_to_deg(velocity.angle()) + 180 - 10)
+	else:
+		active_animation.rotation = deg_to_rad(rad_to_deg(velocity.angle()) +10)
 	apply_gravity(delta);
 
 func update_roll(delta: float) -> void:
@@ -179,27 +190,31 @@ func update_roll(delta: float) -> void:
 		enter_neutral_state();
 		return;
 		
-	active_animation.rotation += roll_rotation_speed;
+	if facing_direction == -1:
+		active_animation.rotation -= roll_rotation_speed;
+	else:
+		active_animation.rotation += roll_rotation_speed;
+	
 	apply_gravity(delta);
 	
 func update_bubbled() -> void:
 	if Input.is_action_pressed("P%s_jump" % player_id):
 		enter_bubbled_charge_state();
 		return;
-	# update facing direction from aim
-	facing_direction = sign(move_dir.x);
-	set_sprite_flip();
+	active_animation.rotation += roll_rotation_speed;
 	
-func update_bubbled_charge() -> void:
+func update_bubbled_charge(delta: float) -> void:
 	if Input.is_action_just_released("P%s_jump" % player_id):
 		enter_dive_state();
 		return;
 	jump_dir.x = Input.get_joy_axis(player_id,JOY_AXIS_RIGHT_X)
 	jump_dir.y = Input.get_joy_axis(player_id,JOY_AXIS_RIGHT_Y)
 	jump_power.rotation = get_angle_to(global_position + jump_dir) + 80
-	active_animation.rotation = jump_power.rotation + 0;
+	
+	active_animation.rotation = get_angle_to(global_position + jump_dir) - 30;
+	
 	if (jump_power_value < jump_power.max_value):
-		jump_power_value += jump_charge_speed
+		jump_power_value += jump_charge_speed * delta * 100
 		jump_power.value = jump_power_value
 #endregion
 
@@ -214,4 +229,3 @@ func apply_gravity(delta: float) -> void:
 
 func reset_state() -> void:
 	enter_neutral_state();
-	
