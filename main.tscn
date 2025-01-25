@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://cyyt8eo8ch6l5"]
+[gd_scene load_steps=22 format=3 uid="uid://cyyt8eo8ch6l5"]
 
 [ext_resource type="Script" uid="uid://dmapdb801rdsa" path="res://scripts/game_manager.gd" id="1_7mycd"]
 [ext_resource type="PackedScene" uid="uid://dignp846out3w" path="res://scenes/bubbles/bubble.tscn" id="2_0xm2m"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://dvfbvbqrvwhrk" path="res://scenes/bubbles/life_bubble_p0.tscn" id="5_5vw27"]
 [ext_resource type="PackedScene" uid="uid://cmlwa3jf6pcur" path="res://scenes/player.tscn" id="5_lquwl"]
 [ext_resource type="PackedScene" uid="uid://xslr5vke8uwa" path="res://scenes/bubbles/life_bubble_p1.tscn" id="6_kek77"]
+[ext_resource type="PackedScene" uid="uid://dhtfw5dghpq1q" path="res://scenes/bubbles/loot_bubble_box.tscn" id="9_ycdy4"]
 [ext_resource type="Script" uid="uid://2sdtj4vioo1" path="res://scripts/player_ui.gd" id="10_4c57u"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_7dm0k"]
@@ -79,6 +80,8 @@ shape = SubResource("WorldBoundaryShape2D_ig7tw")
 
 [node name="Killzone" type="Area2D" parent="World"]
 position = Vector2(0, 181)
+collision_layer = 257
+collision_mask = 257
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/Killzone"]
 position = Vector2(0.5, -85.5)
@@ -98,7 +101,7 @@ position = Vector2(-10, 143)
 script = ExtResource("2_h2yge")
 p0_life_object = ExtResource("5_5vw27")
 p1_life_object = ExtResource("6_kek77")
-bubble_objects = Array[PackedScene]([ExtResource("2_0xm2m"), ExtResource("4_7mycd")])
+bubble_objects = Array[PackedScene]([ExtResource("2_0xm2m"), ExtResource("4_7mycd"), ExtResource("9_ycdy4")])
 bubble_cap = 10000
 
 [node name="Timer" type="Timer" parent="."]
@@ -168,7 +171,7 @@ position = Vector2(-10, 106)
 collision_layer = 257
 collision_mask = 257
 script = ExtResource("3_h2yge")
-wind_force = Vector2(0, -8)
+wind_force = Vector2(0, -6)
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Fans/Wind Center"]
@@ -176,11 +179,11 @@ position = Vector2(0, -23.5)
 shape = SubResource("RectangleShape2D_1bvp3")
 
 [node name="Wind TR" type="Area2D" parent="Level/Fans"]
-position = Vector2(244, -60)
+position = Vector2(216, -59)
 collision_layer = 257
 collision_mask = 257
 script = ExtResource("3_h2yge")
-wind_force = Vector2(0, 5)
+wind_force = Vector2(1, 6)
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Fans/Wind TR"]
@@ -188,11 +191,11 @@ position = Vector2(0, -7)
 shape = SubResource("RectangleShape2D_h2yge")
 
 [node name="Wind TL" type="Area2D" parent="Level/Fans"]
-position = Vector2(-237, -60)
+position = Vector2(-208, -61)
 collision_layer = 257
 collision_mask = 257
 script = ExtResource("3_h2yge")
-wind_force = Vector2(0, 5)
+wind_force = Vector2(-1, 6)
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Fans/Wind TL"]
@@ -204,7 +207,7 @@ position = Vector2(-237, 76)
 collision_layer = 257
 collision_mask = 257
 script = ExtResource("3_h2yge")
-wind_force = Vector2(5, 0)
+wind_force = Vector2(6, 0)
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Fans/Wind BL"]
@@ -216,7 +219,7 @@ position = Vector2(243, 74)
 collision_layer = 257
 collision_mask = 257
 script = ExtResource("3_h2yge")
-wind_force = Vector2(-5, 0)
+wind_force = Vector2(-6, 0)
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Fans/Wind BR"]
@@ -224,13 +227,13 @@ position = Vector2(-3.5, 4)
 shape = SubResource("RectangleShape2D_lquwl")
 
 [node name="P1 Spawn" type="Node2D" parent="."]
-position = Vector2(145, -2)
+position = Vector2(145, 9)
 metadata/_edit_group_ = true
 
 [node name="Player" parent="P1 Spawn" instance=ExtResource("5_lquwl")]
 
 [node name="P2 Spawn" type="Node2D" parent="."]
-position = Vector2(-151, -2)
+position = Vector2(-154, 10)
 metadata/_edit_group_ = true
 
 [node name="Player" parent="P2 Spawn" instance=ExtResource("5_lquwl")]
@@ -306,13 +309,3 @@ horizontal_alignment = 1
 
 [connection signal="body_entered" from="World/Killzone" to="." method="_on_killzone_body_entered"]
 [connection signal="timeout" from="Timer" to="BubbleSpawner" method="_on_timer_timeout"]
-[connection signal="body_entered" from="Level/Fans/Wind Center" to="Level/Fans/Wind Center" method="_on_body_entered"]
-[connection signal="body_exited" from="Level/Fans/Wind Center" to="Level/Fans/Wind Center" method="_on_body_exited"]
-[connection signal="body_entered" from="Level/Fans/Wind TR" to="Level/Fans/Wind TR" method="_on_body_entered"]
-[connection signal="body_exited" from="Level/Fans/Wind TR" to="Level/Fans/Wind TR" method="_on_body_exited"]
-[connection signal="body_entered" from="Level/Fans/Wind TL" to="Level/Fans/Wind TL" method="_on_body_entered"]
-[connection signal="body_exited" from="Level/Fans/Wind TL" to="Level/Fans/Wind TL" method="_on_body_exited"]
-[connection signal="body_entered" from="Level/Fans/Wind BL" to="Level/Fans/Wind BL" method="_on_body_entered"]
-[connection signal="body_exited" from="Level/Fans/Wind BL" to="Level/Fans/Wind BL" method="_on_body_exited"]
-[connection signal="body_entered" from="Level/Fans/Wind BR" to="Level/Fans/Wind BR" method="_on_body_entered"]
-[connection signal="body_exited" from="Level/Fans/Wind BR" to="Level/Fans/Wind BR" method="_on_body_exited"]

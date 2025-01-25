@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://elipr40t1qq7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n0r8v"]
+size = Vector2(26, 26)
+
+[node name="Box" type="RigidBody2D" groups=["krillable"]]
+collision_layer = 256
+collision_mask = 257
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(13, 13)
+shape = SubResource("RectangleShape2D_n0r8v")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 26.0
+offset_bottom = 26.0
+color = Color(0.470964, 0.276819, 0.0554031, 1)

@@ -1,23 +1,22 @@
-class_name Bubble
-extends RigidBody2D
+class_name BubbleDrop
+extends Bubble
 
-@onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
-@onready var panel: Panel = $Panel
+@export var loot : PackedScene
 
-var random_force : Vector2
+var dropped : bool = false
 
-func _ready() -> void:
-
-	apply_central_impulse(random_force)
-
-func set_bubble_size(factor : float):
-	collision_shape_2d.scale *= factor
-	panel.scale *= factor
+func drop_loot():
+	if !dropped:
+		var loot_drop = loot.instantiate()
+		get_tree().get_root().add_child(loot_drop)
+		loot_drop.global_position = global_position
+		
+	dropped = true
 	
-func pop_da_bubble():
-	SignalBus.BubblePopped.emit()
-	queue_free()
+func set_bubble_size(factor : float):
+	pass
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.is_in_group("popper"):
+		drop_loot()
 		pop_da_bubble()

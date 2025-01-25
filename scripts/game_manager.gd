@@ -14,3 +14,5 @@ func _process(delta: float) -> void:
 func _on_killzone_body_entered(body: Node2D) -> void:
 	if body.is_in_group("players"):
 		body.position = Vector2.ZERO
+	if body.is_in_group("krillable"):
+		body.queue_free()

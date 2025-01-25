@@ -8,16 +8,25 @@ extends Node2D
 
 @export var bubble_objects : Array[PackedScene]
 
-@export var bubble_cap : int = 50
+@export var bubble_cap : int = 25
 @export var bubble_ratio : int = 5
 
 var rng = RandomNumberGenerator.new()
 var bubble_count : int = 0
+var normal_rate : float
 
 var life_timer = 10
+var boost_timer = 15
+var boosting : bool = false
 
 func _ready() -> void:
+	SignalBus.BubbleBoost.connect(_on_bubble_boost)
 	SignalBus.BubblePopped.connect(_on_bubble_popped)
+	
+	normal_rate = timer.wait_time
+	
+	SignalBus.BubbleBoost.emit()
+	
 	
 func spawn_bubble(obj : PackedScene):
 	var bubble = obj.instantiate() as Bubble
@@ -27,10 +36,21 @@ func spawn_bubble(obj : PackedScene):
 	add_child(bubble)
 	bubble.set_bubble_size(randf_range(0.5,2))
 
+func _on_bubble_boost():
+	boost_timer = 20
+	boosting = true
+	timer.wait_time = normal_rate / 5
+
 func _on_bubble_popped():
 	bubble_count -= 1
 
 func _on_timer_timeout() -> void:
+	
+	if boosting && boost_timer > 0:
+		boost_timer -= 1
+	else:
+		boosting = false
+		timer.wait_time = normal_rate
 	
 	if life_timer == 0:
 		spawn_bubble(p0_life_object)

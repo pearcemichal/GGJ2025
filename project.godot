@@ -27,6 +27,7 @@ enabled=PackedStringArray("res://addons/script-ide/plugin.cfg")
 
 popper="Can pop bubbles"
 players="player group"
+krillable="can be krilled"
 
 [input]
 
