@@ -156,7 +156,7 @@ show_percentage = false
 visible = false
 position = Vector2(0, -12)
 sprite_frames = SubResource("SpriteFrames_smehm")
-animation = &"Neutral"
+animation = &"Dive"
 autoplay = "Neutral"
 
 [node name="Blue Sprites" type="AnimatedSprite2D" parent="."]
@@ -165,3 +165,5 @@ position = Vector2(0, -12)
 sprite_frames = SubResource("SpriteFrames_jej6c")
 animation = &"Neutral"
 autoplay = "Neutral"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]

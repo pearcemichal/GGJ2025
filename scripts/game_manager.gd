@@ -8,8 +8,10 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
-
+	if Input.is_key_pressed(KEY_BACKSPACE):
+		get_tree().reload_current_scene();
+	if Input.is_key_pressed(KEY_ESCAPE):
+		get_tree().quit()
 
 func _on_killzone_body_entered(body: Node2D) -> void:
 	if body.is_in_group("players"):

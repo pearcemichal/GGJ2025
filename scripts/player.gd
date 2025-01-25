@@ -16,6 +16,7 @@ var facing_direction : int = 1; # Set based on player
 var jump_power_value : float
 var active_animation : AnimatedSprite2D
 var roll_rotation_speed = 0.032; #0.008 for bubble mode
+var jump_charge_speed = 0.075; # default was 0.5;
 
 enum player_states { Neutral, Charge, Dive, Roll, Bubbled, BubbledCharge }
 var player_state : player_states = player_states.Neutral;
@@ -60,7 +61,7 @@ func _physics_process(delta: float) -> void:
 		if move_dir:
 			velocity.x = move_dir.x * SPEED
 		else:
-			velocity.x = move_toward(velocity.x, 0, SPEED)
+			velocity.x = 0
 	else:
 		velocity.y += get_gravity().y * delta
 	
@@ -123,12 +124,15 @@ func update_charge() -> void:
 	jump_dir.y = Input.get_joy_axis(player_id,JOY_AXIS_RIGHT_Y)
 	jump_power.rotation = get_angle_to(global_position + jump_dir) + 80
 	if (jump_power_value < jump_power.max_value):
-		jump_power_value += 0.5
+		jump_power_value += jump_charge_speed
 		jump_power.value = jump_power_value
+	facing_direction = sign(jump_dir.x);
+	set_sprite_flip();
 
 func update_dive() -> void:
 	if jump_bubble:
 		enter_bubbled_state();
+		return;
 	if is_on_floor():
 		enter_neutral_state();
 		return;
@@ -141,6 +145,7 @@ func update_dive() -> void:
 func update_roll() -> void:
 	if jump_bubble:
 		enter_bubbled_state();
+		return;
 	if is_on_floor():
 		enter_neutral_state();
 		return;
@@ -161,8 +166,9 @@ func update_bubbled_charge() -> void:
 	jump_dir.x = Input.get_joy_axis(player_id,JOY_AXIS_RIGHT_X)
 	jump_dir.y = Input.get_joy_axis(player_id,JOY_AXIS_RIGHT_Y)
 	jump_power.rotation = get_angle_to(global_position + jump_dir) + 80
+	active_animation.rotation = jump_power.rotation + 0;
 	if (jump_power_value < jump_power.max_value):
-		jump_power_value += 0.5
+		jump_power_value += jump_charge_speed
 		jump_power.value = jump_power_value
 #endregion
 
