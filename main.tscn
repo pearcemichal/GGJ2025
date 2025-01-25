@@ -1,18 +1,431 @@
-[gd_scene load_steps=27 format=3 uid="uid://cyyt8eo8ch6l5"]
+[gd_scene load_steps=57 format=3 uid="uid://cyyt8eo8ch6l5"]
 
 [ext_resource type="Script" uid="uid://dmapdb801rdsa" path="res://scripts/game_manager.gd" id="1_7mycd"]
 [ext_resource type="PackedScene" uid="uid://dignp846out3w" path="res://scenes/bubbles/bubble.tscn" id="2_0xm2m"]
 [ext_resource type="Texture2D" uid="uid://ckqkwmpjiw3ve" path="res://assets/Sprites/Background.png" id="2_dg77c"]
 [ext_resource type="Script" uid="uid://cp71ijqdbc6kp" path="res://scripts/bubble_spawner.gd" id="2_h2yge"]
+[ext_resource type="Script" uid="uid://ctfctluf718j3" path="res://critter_manager.gd" id="3_2cqfq"]
 [ext_resource type="Script" uid="uid://burb0fept261t" path="res://scripts/wind.gd" id="3_h2yge"]
 [ext_resource type="Texture2D" uid="uid://bulyagxqyyk65" path="res://assets/Sprites/BG Ship Interior.png" id="3_ycdy4"]
 [ext_resource type="PackedScene" uid="uid://goffmnls2sjg" path="res://scenes/bubbles/jump_bubble.tscn" id="4_7mycd"]
+[ext_resource type="Texture2D" uid="uid://cxbny5atsv1m7" path="res://assets/Background/Fight_Glub_11.webp" id="4_vivmo"]
 [ext_resource type="Texture2D" uid="uid://cc8ng7ejyhbpo" path="res://assets/Sprites/Main Stage.png" id="4_w48qg"]
 [ext_resource type="PackedScene" uid="uid://dvfbvbqrvwhrk" path="res://scenes/bubbles/life_bubble_p0.tscn" id="5_5vw27"]
 [ext_resource type="PackedScene" uid="uid://cmlwa3jf6pcur" path="res://scenes/player.tscn" id="5_lquwl"]
+[ext_resource type="Texture2D" uid="uid://d0ld1v1x67l67" path="res://assets/Background/Fish_02_Sheet.png" id="5_vivmo"]
 [ext_resource type="PackedScene" uid="uid://xslr5vke8uwa" path="res://scenes/bubbles/life_bubble_p1.tscn" id="6_kek77"]
 [ext_resource type="PackedScene" uid="uid://dhtfw5dghpq1q" path="res://scenes/bubbles/loot_bubble_box.tscn" id="9_ycdy4"]
 [ext_resource type="Script" uid="uid://2sdtj4vioo1" path="res://scripts/player_ui.gd" id="10_4c57u"]
+
+[sub_resource type="Animation" id="Animation_w48qg"]
+resource_name = "fishman"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Fishman:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(340, -98), Vector2(-341, -98)]
+}
+
+[sub_resource type="Animation" id="Animation_vivmo"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Fishman:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-341, -98)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Jellyman Group:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(243, -281)]
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Fishman2:position:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(403, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Fishman2:position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-51, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Fishman Group:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(408.635, -77.37)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("BigJellyman:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-302, -392)]
+}
+
+[sub_resource type="Animation" id="Animation_2cqfq"]
+resource_name = "jellyman"
+length = 8.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Jellyman Group:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.94, 2.36, 3.93667, 4.36667, 8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-356, 126), Vector2(-189.991, -6.907), Vector2(-151.722, 2.999), Vector2(-44.5346, -74.1214), Vector2(-14.303, -52.953), Vector2(243, -281)]
+}
+
+[sub_resource type="Animation" id="Animation_yaehf"]
+resource_name = "big_fishman"
+length = 9.0
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Fishman2:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(399, -0.25, 0, 0.25, 0, 58, -0.25, 0, 0.25, 0, -414, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 3, 9)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Fishman2:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(-51, -0.25, 0, 0.25, 0, -51, -0.25, 0, 0.25, 0, -101, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 3, 9)
+}
+
+[sub_resource type="Animation" id="Animation_074og"]
+resource_name = "fishman_group"
+length = 8.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Fishman Group:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-404.4, -77.37), Vector2(408.635, -77.37)]
+}
+
+[sub_resource type="Animation" id="Animation_cegan"]
+resource_name = "big_jellyman"
+length = 9.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BigJellyman:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(384, 375), Vector2(-302, -392)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2cqfq"]
+_data = {
+&"RESET": SubResource("Animation_vivmo"),
+&"big_fishman": SubResource("Animation_yaehf"),
+&"big_jellyman": SubResource("Animation_cegan"),
+&"fishman": SubResource("Animation_w48qg"),
+&"fishman_group": SubResource("Animation_074og"),
+&"jellyman": SubResource("Animation_2cqfq")
+}
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_82xsv"]
+atlas = ExtResource("5_vivmo")
+region = Rect2(0, 0, 63, 59)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_getpj"]
+atlas = ExtResource("5_vivmo")
+region = Rect2(63, 0, 63, 59)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ryguw"]
+atlas = ExtResource("5_vivmo")
+region = Rect2(126, 0, 63, 59)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d13ii"]
+atlas = ExtResource("5_vivmo")
+region = Rect2(189, 0, 63, 59)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1u8w0"]
+atlas = ExtResource("5_vivmo")
+region = Rect2(252, 0, 63, 59)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0odxb"]
+atlas = ExtResource("5_vivmo")
+region = Rect2(315, 0, 63, 59)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lswn8"]
+atlas = ExtResource("5_vivmo")
+region = Rect2(378, 0, 63, 59)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a6jrf"]
+atlas = ExtResource("5_vivmo")
+region = Rect2(378, 0, 63, 59)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xuqvo"]
+atlas = ExtResource("5_vivmo")
+region = Rect2(378, 0, 63, 59)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_getpj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_82xsv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_getpj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ryguw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d13ii")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1u8w0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0odxb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lswn8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a6jrf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xuqvo")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2cqfq"]
+atlas = ExtResource("4_vivmo")
+region = Rect2(0, 0, 110, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yaehf"]
+atlas = ExtResource("4_vivmo")
+region = Rect2(110, 0, 110, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_074og"]
+atlas = ExtResource("4_vivmo")
+region = Rect2(220, 0, 110, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cegan"]
+atlas = ExtResource("4_vivmo")
+region = Rect2(330, 0, 110, 45)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_82xsv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2cqfq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yaehf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_074og")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cegan")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2cqfq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2cqfq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yaehf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_074og")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cegan")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yaehf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_82xsv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_getpj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ryguw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d13ii")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1u8w0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0odxb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lswn8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a6jrf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xuqvo")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_a6jrf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_82xsv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_getpj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ryguw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d13ii")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1u8w0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0odxb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lswn8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a6jrf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xuqvo")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_074og"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_074og")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cegan")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2cqfq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yaehf")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cegan"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yaehf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_074og")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cegan")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2cqfq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_7dm0k"]
 normal = Vector2(0, 1)
@@ -22,12 +435,6 @@ distance = 3.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_272bh"]
 size = Vector2(535, 19)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_0xm2m"]
-size = Vector2(77, 19)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_kek77"]
-size = Vector2(57, 19)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1bvp3"]
 size = Vector2(62, 161)
@@ -72,141 +479,161 @@ size = Vector2(46, 151)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lquwl"]
 size = Vector2(55, 52)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0xm2m"]
+size = Vector2(77, 19)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kek77"]
+size = Vector2(57, 19)
+
 [node name="Main" type="Node2D"]
 script = ExtResource("1_7mycd")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)
 
-[node name="World" type="Node2D" parent="."]
+[node name="Background" type="Node2D" parent="."]
 
-[node name="Top Bound" type="StaticBody2D" parent="World"]
-position = Vector2(0, -144)
-collision_layer = 271
-collision_mask = 15
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Top Bound"]
-shape = SubResource("WorldBoundaryShape2D_7dm0k")
-
-[node name="Bottom Bound" type="StaticBody2D" parent="World"]
-position = Vector2(0, 163)
-collision_layer = 271
-collision_mask = 15
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Bottom Bound"]
-shape = SubResource("WorldBoundaryShape2D_ig7tw")
-
-[node name="Left Bound" type="StaticBody2D" parent="World"]
-position = Vector2(19, 204)
-collision_layer = 271
-collision_mask = 15
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Left Bound"]
-position = Vector2(-288, -203)
-rotation = 1.5708
-shape = SubResource("WorldBoundaryShape2D_ig7tw")
-
-[node name="Right Bound" type="StaticBody2D" parent="World"]
-position = Vector2(-20, 204)
-collision_layer = 271
-collision_mask = 15
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Right Bound"]
-position = Vector2(288, -203)
-rotation = -1.5708
-shape = SubResource("WorldBoundaryShape2D_ig7tw")
-
-[node name="Killzone" type="Area2D" parent="World"]
-position = Vector2(0, 181)
-collision_layer = 271
-collision_mask = 271
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Killzone"]
-position = Vector2(0.5, -85.5)
-shape = SubResource("RectangleShape2D_272bh")
-
-[node name="Ocean BG" type="Sprite2D" parent="World"]
+[node name="Ocean BG" type="Sprite2D" parent="Background"]
 scale = Vector2(1.2, 1.2)
 texture = ExtResource("2_dg77c")
 metadata/_edit_lock_ = true
 
-[node name="Ship Interior" type="Sprite2D" parent="World"]
-scale = Vector2(1.2, 1.2)
-texture = ExtResource("3_ycdy4")
+[node name="Critters" type="Node2D" parent="Background"]
+script = ExtResource("3_2cqfq")
 
-[node name="BubbleSpawner" type="Node2D" parent="."]
-position = Vector2(-10, 143)
-script = ExtResource("2_h2yge")
-basic_bubble = Array[PackedScene]([ExtResource("2_0xm2m"), ExtResource("4_7mycd")])
-life_bubbles = Array[PackedScene]([ExtResource("5_5vw27"), ExtResource("6_kek77")])
-loot_bubbles = Array[PackedScene]([ExtResource("9_ycdy4")])
-bubble_cap = 50
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Background/Critters"]
+libraries = {
+&"": SubResource("AnimationLibrary_2cqfq")
+}
 
-[node name="Timer" type="Timer" parent="."]
-wait_time = 0.5
+[node name="Timer" type="Timer" parent="Background/Critters"]
+wait_time = 10.0
 autostart = true
 
+[node name="BigJellyman" type="AnimatedSprite2D" parent="Background/Critters"]
+position = Vector2(-302, -392)
+scale = Vector2(4.0678, 4.0678)
+sprite_frames = SubResource("SpriteFrames_getpj")
+autoplay = "default"
+flip_h = true
+
+[node name="Fishman" type="AnimatedSprite2D" parent="Background/Critters"]
+position = Vector2(-341, -98)
+sprite_frames = SubResource("SpriteFrames_82xsv")
+autoplay = "default"
+frame_progress = 0.473024
+
+[node name="Fishman2" type="AnimatedSprite2D" parent="Background/Critters"]
+position = Vector2(403, -51)
+scale = Vector2(1.82222, 1.82222)
+sprite_frames = SubResource("SpriteFrames_2cqfq")
+autoplay = "default"
+frame = 3
+frame_progress = 0.27805
+
+[node name="Jellyman Group" type="Node2D" parent="Background/Critters"]
+position = Vector2(243, -281)
+metadata/_edit_group_ = true
+
+[node name="Jellyman" type="AnimatedSprite2D" parent="Background/Critters/Jellyman Group"]
+position = Vector2(56.5, -31)
+scale = Vector2(1.08475, 1.08475)
+sprite_frames = SubResource("SpriteFrames_yaehf")
+autoplay = "default"
+
+[node name="Jellyman2" type="AnimatedSprite2D" parent="Background/Critters/Jellyman Group"]
+position = Vector2(-44.5, 10)
+sprite_frames = SubResource("SpriteFrames_a6jrf")
+autoplay = "default"
+frame_progress = 0.168308
+
+[node name="Jellyman3" type="AnimatedSprite2D" parent="Background/Critters/Jellyman Group"]
+position = Vector2(22.5, 70)
+scale = Vector2(1.52542, 1.52542)
+sprite_frames = SubResource("SpriteFrames_yaehf")
+autoplay = "default"
+
+[node name="Jellyman4" type="AnimatedSprite2D" parent="Background/Critters/Jellyman Group"]
+position = Vector2(-28.5001, -50)
+scale = Vector2(1.32203, 1.32203)
+sprite_frames = SubResource("SpriteFrames_a6jrf")
+autoplay = "default"
+frame_progress = 0.168308
+
+[node name="Fishman Group" type="Node2D" parent="Background/Critters"]
+position = Vector2(408.635, -77.37)
+
+[node name="Fishman" type="AnimatedSprite2D" parent="Background/Critters/Fishman Group"]
+sprite_frames = SubResource("SpriteFrames_82xsv")
+autoplay = "default"
+frame_progress = 0.234192
+flip_h = true
+
+[node name="Fishman2" type="AnimatedSprite2D" parent="Background/Critters/Fishman Group"]
+position = Vector2(-43.575, 49.58)
+sprite_frames = SubResource("SpriteFrames_074og")
+autoplay = "default"
+flip_h = true
+
+[node name="Fishman3" type="AnimatedSprite2D" parent="Background/Critters/Fishman Group"]
+position = Vector2(54.425, 37.58)
+sprite_frames = SubResource("SpriteFrames_cegan")
+autoplay = "default"
+flip_h = true
+
+[node name="Ship Interior" type="Sprite2D" parent="Background"]
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("3_ycdy4")
+metadata/_edit_lock_ = true
+
+[node name="Boundary" type="Node2D" parent="."]
+
+[node name="Top Bound" type="StaticBody2D" parent="Boundary"]
+position = Vector2(0, -144)
+collision_layer = 271
+collision_mask = 15
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundary/Top Bound"]
+shape = SubResource("WorldBoundaryShape2D_7dm0k")
+
+[node name="Bottom Bound" type="StaticBody2D" parent="Boundary"]
+position = Vector2(0, 163)
+collision_layer = 271
+collision_mask = 15
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundary/Bottom Bound"]
+shape = SubResource("WorldBoundaryShape2D_ig7tw")
+
+[node name="Left Bound" type="StaticBody2D" parent="Boundary"]
+position = Vector2(19, 204)
+collision_layer = 271
+collision_mask = 15
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundary/Left Bound"]
+position = Vector2(-288, -203)
+rotation = 1.5708
+shape = SubResource("WorldBoundaryShape2D_ig7tw")
+
+[node name="Right Bound" type="StaticBody2D" parent="Boundary"]
+position = Vector2(-20, 204)
+collision_layer = 271
+collision_mask = 15
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundary/Right Bound"]
+position = Vector2(288, -203)
+rotation = -1.5708
+shape = SubResource("WorldBoundaryShape2D_ig7tw")
+
+[node name="Killzone" type="Area2D" parent="Boundary"]
+position = Vector2(0, 181)
+collision_layer = 271
+collision_mask = 271
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundary/Killzone"]
+position = Vector2(0.5, -85.5)
+shape = SubResource("RectangleShape2D_272bh")
+
 [node name="Level" type="Node2D" parent="."]
-
-[node name="Platform" type="StaticBody2D" parent="Level"]
-position = Vector2(-191, -37)
-collision_layer = 271
-collision_mask = 15
-metadata/_edit_group_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Platform"]
-position = Vector2(-1, 0)
-shape = SubResource("RectangleShape2D_0xm2m")
-
-[node name="Platform2" type="StaticBody2D" parent="Level"]
-position = Vector2(181, -37)
-collision_layer = 271
-collision_mask = 15
-metadata/_edit_group_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Platform2"]
-position = Vector2(1.5, 0)
-shape = SubResource("RectangleShape2D_0xm2m")
-
-[node name="Platform3" type="StaticBody2D" parent="Level"]
-position = Vector2(-152, 39)
-collision_layer = 271
-collision_mask = 15
-metadata/_edit_group_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Platform3"]
-position = Vector2(-1.5, 0.5)
-shape = SubResource("RectangleShape2D_kek77")
-
-[node name="Platform4" type="StaticBody2D" parent="Level"]
-position = Vector2(-66, 1)
-collision_layer = 271
-collision_mask = 15
-metadata/_edit_group_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Platform4"]
-position = Vector2(-1.5, 0.5)
-shape = SubResource("RectangleShape2D_kek77")
-
-[node name="Platform5" type="StaticBody2D" parent="Level"]
-position = Vector2(49, 1)
-collision_layer = 271
-collision_mask = 15
-metadata/_edit_group_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Platform5"]
-position = Vector2(-1.5, 0.5)
-shape = SubResource("RectangleShape2D_kek77")
-
-[node name="Platform6" type="StaticBody2D" parent="Level"]
-position = Vector2(146, 39)
-collision_layer = 271
-collision_mask = 15
-metadata/_edit_group_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Platform6"]
-position = Vector2(-1.5, 0.5)
-shape = SubResource("RectangleShape2D_kek77")
 
 [node name="Fans" type="Node2D" parent="Level"]
 
@@ -294,6 +721,80 @@ position = Vector2(29.14, 5.505)
 rotation = -1.5708
 process_material = SubResource("ParticleProcessMaterial_ycdy4")
 
+[node name="Platforms" type="Node2D" parent="Level"]
+
+[node name="Platform" type="StaticBody2D" parent="Level/Platforms"]
+position = Vector2(-191, -37)
+collision_layer = 271
+collision_mask = 15
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Platforms/Platform"]
+position = Vector2(-1, 0)
+shape = SubResource("RectangleShape2D_0xm2m")
+
+[node name="Platform2" type="StaticBody2D" parent="Level/Platforms"]
+position = Vector2(181, -37)
+collision_layer = 271
+collision_mask = 15
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Platforms/Platform2"]
+position = Vector2(1.5, 0)
+shape = SubResource("RectangleShape2D_0xm2m")
+
+[node name="Platform3" type="StaticBody2D" parent="Level/Platforms"]
+position = Vector2(-152, 39)
+collision_layer = 271
+collision_mask = 15
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Platforms/Platform3"]
+position = Vector2(-1.5, 0.5)
+shape = SubResource("RectangleShape2D_kek77")
+
+[node name="Platform4" type="StaticBody2D" parent="Level/Platforms"]
+position = Vector2(-66, 1)
+collision_layer = 271
+collision_mask = 15
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Platforms/Platform4"]
+position = Vector2(-1.5, 0.5)
+shape = SubResource("RectangleShape2D_kek77")
+
+[node name="Platform5" type="StaticBody2D" parent="Level/Platforms"]
+position = Vector2(49, 1)
+collision_layer = 271
+collision_mask = 15
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Platforms/Platform5"]
+position = Vector2(-1.5, 0.5)
+shape = SubResource("RectangleShape2D_kek77")
+
+[node name="Platform6" type="StaticBody2D" parent="Level/Platforms"]
+position = Vector2(146, 39)
+collision_layer = 271
+collision_mask = 15
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Platforms/Platform6"]
+position = Vector2(-1.5, 0.5)
+shape = SubResource("RectangleShape2D_kek77")
+
+[node name="BubbleSpawner" type="Node2D" parent="Level"]
+position = Vector2(-10, 143)
+script = ExtResource("2_h2yge")
+basic_bubble = Array[PackedScene]([ExtResource("2_0xm2m"), ExtResource("4_7mycd")])
+life_bubbles = Array[PackedScene]([ExtResource("5_5vw27"), ExtResource("6_kek77")])
+loot_bubbles = Array[PackedScene]([ExtResource("9_ycdy4")])
+bubble_cap = 50
+
+[node name="Timer" type="Timer" parent="Level"]
+wait_time = 0.5
+autostart = true
+
 [node name="P1 Spawn" type="Node2D" parent="."]
 position = Vector2(145, 9)
 metadata/_edit_group_ = true
@@ -311,6 +812,7 @@ player_id = 1
 [node name="Main Stage" type="Sprite2D" parent="."]
 scale = Vector2(1.2, 1.2)
 texture = ExtResource("4_w48qg")
+metadata/_edit_lock_ = true
 
 [node name="UI" type="Control" parent="."]
 custom_minimum_size = Vector2(500, 25)
@@ -376,5 +878,6 @@ grow_vertical = 2
 text = "\"\""
 horizontal_alignment = 1
 
-[connection signal="body_entered" from="World/Killzone" to="." method="_on_killzone_body_entered"]
-[connection signal="timeout" from="Timer" to="BubbleSpawner" method="_on_timer_timeout"]
+[connection signal="timeout" from="Background/Critters/Timer" to="Background/Critters" method="_on_timer_timeout"]
+[connection signal="body_entered" from="Boundary/Killzone" to="." method="_on_killzone_body_entered"]
+[connection signal="timeout" from="Level/Timer" to="Level/BubbleSpawner" method="_on_timer_timeout"]
