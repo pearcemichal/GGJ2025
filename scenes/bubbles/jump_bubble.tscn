@@ -1,0 +1,56 @@
+[gd_scene load_steps=6 format=3 uid="uid://goffmnls2sjg"]
+
+[ext_resource type="Script" uid="uid://d3gyddbbyaodd" path="res://scripts/bubble_jump.gd" id="1_vw288"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_n2mqj"]
+friction = 0.01
+bounce = 0.14
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vw288"]
+bg_color = Color(0.152941, 0.152941, 0.152941, 0.384314)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.898039, 0.513726, 0.14902, 0.831373)
+border_blend = true
+corner_radius_top_left = 9
+corner_radius_top_right = 9
+corner_radius_bottom_right = 9
+corner_radius_bottom_left = 9
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ig7tw"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_n2mqj"]
+radius = 13.3417
+
+[node name="Bubble" type="RigidBody2D"]
+collision_layer = 256
+collision_mask = 256
+mass = 0.03
+physics_material_override = SubResource("PhysicsMaterial_n2mqj")
+gravity_scale = -0.01
+max_contacts_reported = 1
+linear_damp = 0.5
+script = ExtResource("1_vw288")
+metadata/_edit_group_ = true
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+pivot_offset = Vector2(10, 10)
+theme_override_styles/panel = SubResource("StyleBoxFlat_vw288")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ig7tw")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+rotation = -0.155574
+shape = SubResource("CircleShape2D_n2mqj")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

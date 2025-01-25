@@ -1,0 +1,54 @@
+[gd_scene load_steps=6 format=3 uid="uid://cmlwa3jf6pcur"]
+
+[ext_resource type="Script" uid="uid://lbwmj3d78ybe" path="res://scripts/player.gd" id="1_onrkg"]
+[ext_resource type="Texture2D" uid="uid://7gvetg4lins6" path="res://assets/magikarp_with_legs_by_bluesportsdrink_depfe3q-pre.png" id="2_i3pqv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7mycd"]
+size = Vector2(20, 25)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lquwl"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.332881, 0.332881, 0.33288, 1)
+expand_margin_left = 1.0
+expand_margin_top = 1.0
+expand_margin_right = 1.0
+expand_margin_bottom = 1.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7mycd"]
+bg_color = Color(0.484482, 0.672847, 0, 1)
+
+[node name="Player" type="CharacterBody2D" groups=["players", "popper"]]
+script = ExtResource("1_onrkg")
+JUMP_VELOCITY = 100.0
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_7mycd")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1.19209e-07, -2)
+scale = Vector2(0.0456026, 0.0456027)
+texture = ExtResource("2_i3pqv")
+
+[node name="JumpPower" type="ProgressBar" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -1.0
+offset_top = 14.0
+offset_right = 1.0
+offset_bottom = 34.0
+grow_horizontal = 2
+pivot_offset = Vector2(1.875, -13.93)
+theme_override_styles/background = SubResource("StyleBoxFlat_lquwl")
+theme_override_styles/fill = SubResource("StyleBoxFlat_7mycd")
+max_value = 7.0
+step = 0.1
+value = 5.0
+fill_mode = 2
+show_percentage = false
