@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://cyyt8eo8ch6l5"]
+[gd_scene load_steps=61 format=3 uid="uid://cyyt8eo8ch6l5"]
 
 [ext_resource type="Script" uid="uid://dmapdb801rdsa" path="res://scripts/game_manager.gd" id="1_7mycd"]
 [ext_resource type="PackedScene" uid="uid://dignp846out3w" path="res://scenes/bubbles/bubble.tscn" id="2_0xm2m"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://cp71ijqdbc6kp" path="res://scripts/bubble_spawner.gd" id="2_h2yge"]
 [ext_resource type="Script" uid="uid://ctfctluf718j3" path="res://critter_manager.gd" id="3_2cqfq"]
 [ext_resource type="Script" uid="uid://burb0fept261t" path="res://scripts/wind.gd" id="3_h2yge"]
+[ext_resource type="Texture2D" uid="uid://crujns8k6cu67" path="res://assets/lightshaft.png" id="3_yaehf"]
 [ext_resource type="Texture2D" uid="uid://bulyagxqyyk65" path="res://assets/Sprites/BG Ship Interior.png" id="3_ycdy4"]
 [ext_resource type="PackedScene" uid="uid://goffmnls2sjg" path="res://scenes/bubbles/jump_bubble.tscn" id="4_7mycd"]
 [ext_resource type="Texture2D" uid="uid://cxbny5atsv1m7" path="res://assets/Background/Fight_Glub_11.webp" id="4_vivmo"]
@@ -16,6 +17,24 @@
 [ext_resource type="PackedScene" uid="uid://xslr5vke8uwa" path="res://scenes/bubbles/life_bubble_p1.tscn" id="6_kek77"]
 [ext_resource type="PackedScene" uid="uid://dhtfw5dghpq1q" path="res://scenes/bubbles/loot_bubble_box.tscn" id="9_ycdy4"]
 [ext_resource type="Script" uid="uid://2sdtj4vioo1" path="res://scripts/player_ui.gd" id="10_4c57u"]
+
+[sub_resource type="Curve" id="Curve_074og"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.345178, 0.191011), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_cegan"]
+curve = SubResource("Curve_074og")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_82xsv"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(200, 1, 1)
+angle_min = -25.0
+angle_max = -25.0
+gravity = Vector3(0, 0, 0)
+scale_max = 3.0
+color = Color(0.900128, 0.878914, 0.768575, 1)
+alpha_curve = SubResource("CurveTexture_cegan")
 
 [sub_resource type="Animation" id="Animation_w48qg"]
 resource_name = "fishman"
@@ -498,6 +517,12 @@ scale = Vector2(1.2, 1.2)
 texture = ExtResource("2_dg77c")
 metadata/_edit_lock_ = true
 
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Background"]
+position = Vector2(48.495, -135.105)
+texture = ExtResource("3_yaehf")
+lifetime = 8.0
+process_material = SubResource("ParticleProcessMaterial_82xsv")
+
 [node name="Critters" type="Node2D" parent="Background"]
 script = ExtResource("3_2cqfq")
 
@@ -521,7 +546,7 @@ flip_h = true
 position = Vector2(-341, -98)
 sprite_frames = SubResource("SpriteFrames_82xsv")
 autoplay = "default"
-frame_progress = 0.473024
+frame_progress = 0.27933
 
 [node name="Fishman2" type="AnimatedSprite2D" parent="Background/Critters"]
 position = Vector2(403, -51)
@@ -634,6 +659,7 @@ position = Vector2(0.5, -85.5)
 shape = SubResource("RectangleShape2D_272bh")
 
 [node name="Level" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
 
 [node name="Fans" type="Node2D" parent="Level"]
 
