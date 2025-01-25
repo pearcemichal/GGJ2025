@@ -167,7 +167,7 @@ shape = SubResource("RectangleShape2D_kek77")
 [node name="Fans" type="Node2D" parent="Level"]
 
 [node name="Wind Center" type="Area2D" parent="Level/Fans"]
-position = Vector2(-10, 106)
+position = Vector2(-10, 55)
 collision_layer = 257
 collision_mask = 257
 script = ExtResource("3_h2yge")
