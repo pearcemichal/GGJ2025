@@ -6,6 +6,8 @@ extends RigidBody2D
 
 var random_force : Vector2
 
+var hit_counter : int = 0
+
 func _ready() -> void:
 
 	apply_central_impulse(random_force)
@@ -21,4 +23,7 @@ func pop_da_bubble():
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	#add_to_group("krillable")
 	if body.is_in_group("popper"):
-		pop_da_bubble()
+		if (hit_counter >= 1):
+			pop_da_bubble()
+		else:
+			hit_counter += 1

@@ -22,7 +22,7 @@ corner_radius_bottom_left = 9
 [sub_resource type="CircleShape2D" id="CircleShape2D_ig7tw"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_n2mqj"]
-radius = 18.1108
+radius = 17.1172
 
 [node name="BubbleJump" type="RigidBody2D"]
 collision_layer = 256
@@ -40,12 +40,12 @@ offset_left = -10.0
 offset_top = -10.0
 offset_right = 10.0
 offset_bottom = 10.0
-scale = Vector2(2, 2)
+scale = Vector2(1.5, 1.5)
 pivot_offset = Vector2(10, 10)
 theme_override_styles/panel = SubResource("StyleBoxFlat_vw288")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-scale = Vector2(2, 2)
+scale = Vector2(1.5, 1.5)
 shape = SubResource("CircleShape2D_ig7tw")
 
 [node name="Area2D" type="Area2D" parent="."]

@@ -12,5 +12,10 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 			SignalBus.PlayerTakeDamage.emit(player_id)
 			pop_da_bubble()
 		else:
-			apply_central_force(body.velocity * 2)
+			if (hit_counter >= 1):
+				pop_da_bubble()
+			else:
+				hit_counter += 1
+				panel.scale /= 2
+				apply_central_force(body.velocity * 2)
 		

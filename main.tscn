@@ -82,21 +82,24 @@ zoom = Vector2(2, 2)
 
 [node name="Top Bound" type="StaticBody2D" parent="World"]
 position = Vector2(0, -144)
-collision_layer = 257
+collision_layer = 271
+collision_mask = 15
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/Top Bound"]
 shape = SubResource("WorldBoundaryShape2D_7dm0k")
 
 [node name="Bottom Bound" type="StaticBody2D" parent="World"]
 position = Vector2(0, 163)
-collision_layer = 257
+collision_layer = 271
+collision_mask = 15
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/Bottom Bound"]
 shape = SubResource("WorldBoundaryShape2D_ig7tw")
 
 [node name="Left Bound" type="StaticBody2D" parent="World"]
 position = Vector2(19, 204)
-collision_layer = 257
+collision_layer = 271
+collision_mask = 15
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/Left Bound"]
 position = Vector2(-288, -203)
@@ -105,7 +108,8 @@ shape = SubResource("WorldBoundaryShape2D_ig7tw")
 
 [node name="Right Bound" type="StaticBody2D" parent="World"]
 position = Vector2(-20, 204)
-collision_layer = 257
+collision_layer = 271
+collision_mask = 15
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/Right Bound"]
 position = Vector2(288, -203)
@@ -114,8 +118,8 @@ shape = SubResource("WorldBoundaryShape2D_ig7tw")
 
 [node name="Killzone" type="Area2D" parent="World"]
 position = Vector2(0, 181)
-collision_layer = 257
-collision_mask = 257
+collision_layer = 271
+collision_mask = 271
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/Killzone"]
 position = Vector2(0.5, -85.5)
@@ -133,10 +137,10 @@ texture = ExtResource("3_ycdy4")
 [node name="BubbleSpawner" type="Node2D" parent="."]
 position = Vector2(-10, 143)
 script = ExtResource("2_h2yge")
-p0_life_object = ExtResource("5_5vw27")
-p1_life_object = ExtResource("6_kek77")
-bubble_objects = Array[PackedScene]([ExtResource("2_0xm2m"), ExtResource("4_7mycd"), ExtResource("9_ycdy4")])
-bubble_cap = 10000
+basic_bubble = Array[PackedScene]([ExtResource("2_0xm2m"), ExtResource("4_7mycd")])
+life_bubbles = Array[PackedScene]([ExtResource("5_5vw27"), ExtResource("6_kek77")])
+loot_bubbles = Array[PackedScene]([ExtResource("9_ycdy4")])
+bubble_cap = 50
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.5
@@ -146,7 +150,8 @@ autostart = true
 
 [node name="Platform" type="StaticBody2D" parent="Level"]
 position = Vector2(-191, -37)
-collision_layer = 257
+collision_layer = 271
+collision_mask = 15
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Platform"]
@@ -155,7 +160,8 @@ shape = SubResource("RectangleShape2D_0xm2m")
 
 [node name="Platform2" type="StaticBody2D" parent="Level"]
 position = Vector2(181, -37)
-collision_layer = 257
+collision_layer = 271
+collision_mask = 15
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Platform2"]
@@ -164,7 +170,8 @@ shape = SubResource("RectangleShape2D_0xm2m")
 
 [node name="Platform3" type="StaticBody2D" parent="Level"]
 position = Vector2(-152, 39)
-collision_layer = 257
+collision_layer = 271
+collision_mask = 15
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Platform3"]
@@ -173,7 +180,8 @@ shape = SubResource("RectangleShape2D_kek77")
 
 [node name="Platform4" type="StaticBody2D" parent="Level"]
 position = Vector2(-66, 1)
-collision_layer = 257
+collision_layer = 271
+collision_mask = 15
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Platform4"]
@@ -182,7 +190,8 @@ shape = SubResource("RectangleShape2D_kek77")
 
 [node name="Platform5" type="StaticBody2D" parent="Level"]
 position = Vector2(49, 1)
-collision_layer = 257
+collision_layer = 271
+collision_mask = 15
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Platform5"]
@@ -191,7 +200,8 @@ shape = SubResource("RectangleShape2D_kek77")
 
 [node name="Platform6" type="StaticBody2D" parent="Level"]
 position = Vector2(146, 39)
-collision_layer = 257
+collision_layer = 271
+collision_mask = 15
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Platform6"]
@@ -295,6 +305,7 @@ position = Vector2(-154, 10)
 metadata/_edit_group_ = true
 
 [node name="Player" parent="P2 Spawn" instance=ExtResource("5_lquwl")]
+collision_layer = 2
 player_id = 1
 
 [node name="Main Stage" type="Sprite2D" parent="."]
