@@ -7,7 +7,6 @@ extends Node2D
 @export var life_bubbles : Array[PackedScene]
 @export var loot_bubbles : Array[PackedScene]
 
-
 @export var bubble_cap : int = 25
 @export var bubble_ratio : int = 5
 
@@ -24,6 +23,8 @@ var loot_timer = 0
 var boost_timer = 15
 var boosting : bool = false
 
+var spawning : bool = false;
+
 func _ready() -> void:
 	SignalBus.BubbleBoost.connect(_on_bubble_boost)
 	SignalBus.BubblePopped.connect(_on_bubble_popped)
@@ -37,6 +38,9 @@ func _ready() -> void:
 	
 	
 func spawn_bubble(obj : PackedScene):
+	if !spawning:
+		return;
+	
 	var bubble = obj.instantiate() as Bubble
 	bubble.name = obj.resource_name
 	bubble.random_force = Vector2(randi_range(-20,20),randi_range(-20,20))

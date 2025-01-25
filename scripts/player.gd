@@ -18,7 +18,7 @@ var active_animation : AnimatedSprite2D
 var roll_rotation_speed = 0.032; #0.008 for bubble mode
 var jump_charge_speed = 0.075; # default was 0.5;
 
-enum player_states { Neutral, Charge, Dive, Roll, Bubbled, BubbledCharge }
+enum player_states { Neutral, Walk, Charge, Dive, Roll, Bubbled, BubbledCharge }
 var player_state : player_states = player_states.Neutral;
 
 #region Lifecycle Functions
@@ -39,13 +39,15 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	match(player_state):
 		player_states.Neutral:
-			update_neutral();
+			update_neutral(delta);
+		player_states.Walk:
+			update_walk_state(delta);
 		player_states.Charge:
 			update_charge();
 		player_states.Dive:
-			update_dive();
+			update_dive(delta);
 		player_states.Roll:
-			update_roll();
+			update_roll(delta);
 		player_states.Bubbled:
 			update_bubbled();
 		player_states.BubbledCharge:
@@ -55,15 +57,6 @@ func _physics_process(delta: float) -> void:
 	if jump_bubble:
 		global_position = jump_bubble.global_position
 		velocity = Vector2.ZERO
-
-	# Handle jump.
-	if is_on_floor():
-		if move_dir:
-			velocity.x = move_dir.x * SPEED
-		else:
-			velocity.x = 0
-	else:
-		velocity.y += get_gravity().y * delta
 	
 	move_and_slide()
 #endregion
@@ -73,6 +66,12 @@ func enter_neutral_state() -> void:
 	player_state = player_states.Neutral;
 	active_animation.play("Neutral");
 	active_animation.rotation = 0;
+	velocity.x = 0;
+	velocity.y = 0;
+
+func enter_walk_state() -> void:
+	player_state = player_states.Walk;
+	active_animation.play("Walk");
 
 func enter_charge_state() -> void:
 	player_state = player_states.Charge;
@@ -93,10 +92,16 @@ func enter_dive_state() -> void:
 	active_animation.play("Dive");
 	jump_power_value = 0
 	jump_power.value = jump_power_value
-	
+	set_sprite_flip();
+
+func enter_roll_state() -> void:
+	player_state = player_states.Roll;
+	active_animation.play("Roll");
+
 func enter_bubbled_state() -> void:
 	player_state = player_states.Bubbled;
 	active_animation.play("Roll");
+	set_sprite_flip();
 	
 func enter_bubbled_charge_state() -> void:
 	player_state = player_states.BubbledCharge;
@@ -107,14 +112,33 @@ func enter_bubbled_charge_state() -> void:
 #endregion
 
 #region Update State
-func update_neutral() -> void:
-	if Input.is_action_pressed("P%s_jump" % player_id):
+func update_neutral(delta: float) -> void:
+	if Input.is_action_pressed("P%s_jump" % player_id) && is_on_floor():
 		enter_charge_state();
 		return;
+	if abs(Input.get_joy_axis(player_id,JOY_AXIS_LEFT_X)) > 0:
+		enter_walk_state();
+		return;
+		
+	if !is_on_floor():
+		apply_gravity(delta);
+
+func update_walk_state(delta: float) -> void:
+	if Input.is_action_pressed("P%s_jump" % player_id) && is_on_floor():
+		enter_charge_state();
+		return;
+	
+	if abs(Input.get_joy_axis(player_id,JOY_AXIS_LEFT_X)) <= 0:
+		enter_neutral_state();
+		return;
+	
 	move_dir.x = Input.get_joy_axis(player_id,JOY_AXIS_LEFT_X)
-	# update facing direction from aim
+	print(move_dir.x)
 	facing_direction = sign(move_dir.x);
 	set_sprite_flip();
+	velocity.x = move_dir.x * SPEED
+	if !is_on_floor():
+		apply_gravity(delta);
 
 func update_charge() -> void:
 	if Input.is_action_just_released("P%s_jump" % player_id):
@@ -129,27 +153,34 @@ func update_charge() -> void:
 	facing_direction = sign(jump_dir.x);
 	set_sprite_flip();
 
-func update_dive() -> void:
+func update_dive(delta: float) -> void:
 	if jump_bubble:
 		enter_bubbled_state();
 		return;
-	if is_on_floor():
+		
+	if is_on_floor() && velocity.y > 0:
 		enter_neutral_state();
 		return;
+	
 	if sign(velocity.y) != -1:
-		player_state = player_states.Roll;
-		active_animation.play("Roll");
-	else:
-		active_animation.rotation = velocity.angle();
+		enter_roll_state();
+		return;
+	
+	# TODO[WP]: rotate based on direction
+	active_animation.rotation = velocity.angle();
+	apply_gravity(delta);
 
-func update_roll() -> void:
+func update_roll(delta: float) -> void:
 	if jump_bubble:
 		enter_bubbled_state();
 		return;
+		
 	if is_on_floor():
 		enter_neutral_state();
 		return;
+		
 	active_animation.rotation += roll_rotation_speed;
+	apply_gravity(delta);
 	
 func update_bubbled() -> void:
 	if Input.is_action_pressed("P%s_jump" % player_id):
@@ -177,3 +208,10 @@ func set_sprite_flip() -> void:
 		active_animation.flip_h = true;
 	else:
 		active_animation.flip_h = false;
+
+func apply_gravity(delta: float) -> void:
+	velocity.y += get_gravity().y * delta;
+
+func reset_state() -> void:
+	enter_neutral_state();
+	
