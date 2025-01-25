@@ -17,7 +17,7 @@ var jump_power_value : float
 var active_animation : AnimatedSprite2D
 var roll_rotation_speed = 0.032; #0.008 for bubble mode
 
-enum player_states { Neutral, Charge, Dive, Roll, Bubbled }
+enum player_states { Neutral, Charge, Dive, Roll, Bubbled, BubbledCharge }
 var player_state : player_states = player_states.Neutral;
 
 #region Lifecycle Functions
@@ -45,6 +45,10 @@ func _process(delta: float) -> void:
 			update_dive();
 		player_states.Roll:
 			update_roll();
+		player_states.Bubbled:
+			update_bubbled();
+		player_states.BubbledCharge:
+			update_bubbled_charge();
 			
 func _physics_process(delta: float) -> void:
 	if jump_bubble:
@@ -88,6 +92,17 @@ func enter_dive_state() -> void:
 	active_animation.play("Dive");
 	jump_power_value = 0
 	jump_power.value = jump_power_value
+	
+func enter_bubbled_state() -> void:
+	player_state = player_states.Bubbled;
+	active_animation.play("Roll");
+	
+func enter_bubbled_charge_state() -> void:
+	player_state = player_states.BubbledCharge;
+	active_animation.play("Charge");
+	jump_power_value = 0;
+	velocity.x = 0;
+	move_dir.x = 0;
 #endregion
 
 #region Update State
@@ -112,6 +127,8 @@ func update_charge() -> void:
 		jump_power.value = jump_power_value
 
 func update_dive() -> void:
+	if jump_bubble:
+		enter_bubbled_state();
 	if is_on_floor():
 		enter_neutral_state();
 		return;
@@ -122,10 +139,31 @@ func update_dive() -> void:
 		active_animation.rotation = velocity.angle();
 
 func update_roll() -> void:
+	if jump_bubble:
+		enter_bubbled_state();
 	if is_on_floor():
 		enter_neutral_state();
 		return;
 	active_animation.rotation += roll_rotation_speed;
+	
+func update_bubbled() -> void:
+	if Input.is_action_pressed("P%s_jump" % player_id):
+		enter_bubbled_charge_state();
+		return;
+	# update facing direction from aim
+	facing_direction = sign(move_dir.x);
+	set_sprite_flip();
+	
+func update_bubbled_charge() -> void:
+	if Input.is_action_just_released("P%s_jump" % player_id):
+		enter_dive_state();
+		return;
+	jump_dir.x = Input.get_joy_axis(player_id,JOY_AXIS_RIGHT_X)
+	jump_dir.y = Input.get_joy_axis(player_id,JOY_AXIS_RIGHT_Y)
+	jump_power.rotation = get_angle_to(global_position + jump_dir) + 80
+	if (jump_power_value < jump_power.max_value):
+		jump_power_value += 0.5
+		jump_power.value = jump_power_value
 #endregion
 
 func set_sprite_flip() -> void:
