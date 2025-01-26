@@ -105,7 +105,8 @@ func enter_dive_state() -> void:
 	player_state = player_states.Dive;
 	active_animation.play("Dive");
 	if jump_bubble:
-		jump_bubble.queue_free()
+		jump_bubble.pop_da_bubble()
+		jump_bubble = null
 	
 	velocity = jump_dir * JUMP_VELOCITY * jump_power_value
 	player_state = player_states.Dive;
