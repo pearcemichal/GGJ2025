@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://dhtfw5dghpq1q"]
+[gd_scene load_steps=10 format=3 uid="uid://dhtfw5dghpq1q"]
 
 [ext_resource type="Script" uid="uid://c34mb31xct1vn" path="res://scripts/bubble_drop.gd" id="1_y7wmc"]
 [ext_resource type="PackedScene" uid="uid://elipr40t1qq7" path="res://scenes/loot/box.tscn" id="2_dupia"]
 [ext_resource type="AudioStream" uid="uid://dlrxrj05d0shd" path="res://assets/Audio/SFX/ESM_Bubble_Pop_Shoot_v2_Game_Organic_Cartoon.wav" id="3_dupia"]
+[ext_resource type="Texture2D" uid="uid://b4sjgrkxn3k1q" path="res://assets/bubble_texture.png" id="4_pc2xj"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_n2mqj"]
 friction = 0.01
@@ -70,6 +71,10 @@ shape = SubResource("CircleShape2D_n2mqj")
 
 [node name="SFX_Pop" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_pc2xj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5625, 0.5625)
+texture = ExtResource("4_pc2xj")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

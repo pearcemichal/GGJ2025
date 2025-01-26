@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://goffmnls2sjg"]
+[gd_scene load_steps=9 format=3 uid="uid://goffmnls2sjg"]
 
 [ext_resource type="Script" uid="uid://d3gyddbbyaodd" path="res://scripts/bubble_jump.gd" id="1_vw288"]
 [ext_resource type="AudioStream" uid="uid://dlrxrj05d0shd" path="res://assets/Audio/SFX/ESM_Bubble_Pop_Shoot_v2_Game_Organic_Cartoon.wav" id="2_7vm7y"]
+[ext_resource type="Texture2D" uid="uid://b4sjgrkxn3k1q" path="res://assets/bubble_texture.png" id="3_vcdg7"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_n2mqj"]
 friction = 0.01
@@ -64,6 +65,10 @@ offset_bottom = 10.0
 scale = Vector2(1.5, 1.5)
 pivot_offset = Vector2(10, 10)
 theme_override_styles/panel = SubResource("StyleBoxFlat_vw288")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.53125, 0.53125)
+texture = ExtResource("3_vcdg7")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

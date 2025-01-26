@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://dvfbvbqrvwhrk"]
+[gd_scene load_steps=10 format=3 uid="uid://dvfbvbqrvwhrk"]
 
 [ext_resource type="Script" uid="uid://bifbjsboyw5o0" path="res://scripts/bubble_life.gd" id="1_xmp06"]
 [ext_resource type="Texture2D" uid="uid://brep1ihy2hsce" path="res://assets/Sprites/Health_Shrimp.webp" id="2_u22fb"]
+[ext_resource type="Texture2D" uid="uid://b4sjgrkxn3k1q" path="res://assets/bubble_texture.png" id="3_qebab"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_n2mqj"]
 friction = 0.01
@@ -69,6 +70,10 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_u22fb")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.34375, 0.34375)
 texture = SubResource("AtlasTexture_qebab")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+scale = Vector2(0.34375, 0.34375)
+texture = ExtResource("3_qebab")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
