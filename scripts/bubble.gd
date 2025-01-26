@@ -3,6 +3,7 @@ extends RigidBody2D
 
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 @onready var panel: Panel = $Panel
+@onready var sfx_pop: AudioStreamPlayer2D = $SFX_Pop
 
 var random_force : Vector2
 
@@ -17,6 +18,9 @@ func set_bubble_size(factor : float):
 	panel.scale *= factor
 	
 func pop_da_bubble():
+	sfx_pop.play();
+	visible = false;
+	await get_tree().create_timer(1).timeout
 	SignalBus.BubblePopped.emit()
 	queue_free()
 

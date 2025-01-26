@@ -73,12 +73,12 @@ func _on_timer_timeout() -> void:
 		life_timer -= 1
 		
 	# spawn loot bubbles
-	#if loot_timer == 0:
-		#var index = rng.randi_range(0,loot_bubbles.size()-1)
-		#spawn_bubble(loot_bubbles[index])
-		#loot_timer = loot_freq
-	#else:
-		#loot_timer -= 1
+	if loot_timer == 0:
+		var index = rng.randi_range(0,loot_bubbles.size()-1)
+		spawn_bubble(loot_bubbles[index])
+		loot_timer = loot_freq
+	else:
+		loot_timer -= 1
 	
 	#spawn basic bubbles
 	if bubble_count < bubble_cap:

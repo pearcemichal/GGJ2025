@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://dhtfw5dghpq1q"]
+[gd_scene load_steps=9 format=3 uid="uid://dhtfw5dghpq1q"]
 
-[ext_resource type="Script" path="res://scripts/bubble_drop.gd" id="1_y7wmc"]
+[ext_resource type="Script" uid="uid://c34mb31xct1vn" path="res://scripts/bubble_drop.gd" id="1_y7wmc"]
 [ext_resource type="PackedScene" uid="uid://elipr40t1qq7" path="res://scenes/loot/box.tscn" id="2_dupia"]
+[ext_resource type="AudioStream" uid="uid://dlrxrj05d0shd" path="res://assets/Audio/SFX/ESM_Bubble_Pop_Shoot_v2_Game_Organic_Cartoon.wav" id="3_dupia"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_n2mqj"]
 friction = 0.01
@@ -24,6 +25,11 @@ corner_radius_bottom_left = 9
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_n2mqj"]
 radius = 16.2788
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_pc2xj"]
+random_pitch = 1.5
+streams_count = 1
+stream_0/stream = ExtResource("3_dupia")
 
 [node name="BubbleLoot" type="RigidBody2D"]
 collision_layer = 256
@@ -61,6 +67,9 @@ shape = SubResource("CircleShape2D_ig7tw")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 rotation = -0.125624
 shape = SubResource("CircleShape2D_n2mqj")
+
+[node name="SFX_Pop" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_pc2xj")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

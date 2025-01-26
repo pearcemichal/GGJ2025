@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cemre188fb03l"
+path="res://.godot/imported/Charge 2.mp3-bb8ea1ba6bb29f169d677e5b2decc3f1.mp3str"
+
+[deps]
+
+source_file="res://assets/Audio/SFX/Charge 2.mp3"
+dest_files=["res://.godot/imported/Charge 2.mp3-bb8ea1ba6bb29f169d677e5b2decc3f1.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

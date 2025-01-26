@@ -6,7 +6,7 @@ extends CharacterBody2D
 @onready var blue_sprites: AnimatedSprite2D = $"Blue Sprites"
 
 @onready var sfx_jump: AudioStreamPlayer2D = $SFX_Jump
-
+@onready var sfx_charge: AudioStreamPlayer2D = $SFX_charge
 
 @export var player_id : int
 @export var SPEED = 100.0
@@ -99,6 +99,7 @@ func enter_charge_state() -> void:
 	jump_power_value = 0;
 	velocity.x = 0;
 	move_dir.x = 0;
+	sfx_charge.play()
 	
 func enter_dive_state() -> void:
 	player_state = player_states.Dive;
