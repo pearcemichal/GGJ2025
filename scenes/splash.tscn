@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://d0o1bxtotjbxs"]
+[gd_scene load_steps=12 format=3 uid="uid://d0o1bxtotjbxs"]
 
 [ext_resource type="Script" uid="uid://d044khi7jb6ou" path="res://splash.gd" id="1_46rw8"]
 [ext_resource type="Texture2D" uid="uid://cfteaas7vbo32" path="res://assets/Sprites/splash.png" id="2_xk4kw"]
+[ext_resource type="AudioStream" uid="uid://bpwr70ebwtnkn" path="res://assets/Audio/SFX/BRS_Water_Splash_Lunge_11.wav" id="3_4rrho"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_un7os"]
 atlas = ExtResource("2_xk4kw")
@@ -53,6 +54,11 @@ animations = [{
 "speed": 15.0
 }]
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_5svwm"]
+random_pitch = 1.1
+streams_count = 1
+stream_0/stream = ExtResource("3_4rrho")
+
 [node name="Splash" type="Node2D"]
 script = ExtResource("1_46rw8")
 
@@ -62,4 +68,8 @@ autoplay = "default"
 frame = 5
 frame_progress = 1.0
 
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_5svwm")
+
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="finished" from="AudioStreamPlayer2D" to="." method="_on_audio_stream_player_2d_finished"]
