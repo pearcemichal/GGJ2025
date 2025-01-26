@@ -1,4 +1,4 @@
-[gd_scene load_steps=87 format=3 uid="uid://cyyt8eo8ch6l5"]
+[gd_scene load_steps=106 format=3 uid="uid://cyyt8eo8ch6l5"]
 
 [ext_resource type="Script" uid="uid://dmapdb801rdsa" path="res://scripts/game_manager.gd" id="1_7mycd"]
 [ext_resource type="PackedScene" uid="uid://dignp846out3w" path="res://scenes/bubbles/bubble.tscn" id="2_0xm2m"]
@@ -24,6 +24,7 @@
 [ext_resource type="Texture2D" uid="uid://rgbqe6uaoyxg" path="res://assets/Sprites/platforms.png" id="20_1u8w0"]
 [ext_resource type="FontFile" uid="uid://d0dx4obxytsvf" path="res://assets/Fonts/Sauce Barbe.otf" id="20_82xsv"]
 [ext_resource type="Texture2D" uid="uid://dwr6l2b0s75qk" path="res://assets/Sprites/Outer Frame.png" id="21_0odxb"]
+[ext_resource type="Texture2D" uid="uid://f3y2r05e23x0" path="res://assets/Background/crab.png" id="25_0odxb"]
 
 [sub_resource type="Curve" id="Curve_074og"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.345178, 0.191011), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -729,6 +730,56 @@ font_color = Color(0.920833, 0.920834, 0, 1)
 [sub_resource type="LabelSettings" id="LabelSettings_82xsv"]
 font = ExtResource("20_82xsv")
 font_color = Color(0.739641, 0.739641, 1.54018e-06, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0cbny"]
+atlas = ExtResource("25_0odxb")
+region = Rect2(0, 0, 39, 35)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hrvbo"]
+atlas = ExtResource("25_0odxb")
+region = Rect2(39, 0, 39, 35)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uypp3"]
+atlas = ExtResource("25_0odxb")
+region = Rect2(78, 0, 39, 35)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_blkrb"]
+atlas = ExtResource("25_0odxb")
+region = Rect2(117, 0, 39, 35)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_abqjc"]
+atlas = ExtResource("25_0odxb")
+region = Rect2(156, 0, 39, 35)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6iyjs"]
+atlas = ExtResource("25_0odxb")
+region = Rect2(195, 0, 39, 35)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4w656"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0cbny")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hrvbo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uypp3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_blkrb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_abqjc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6iyjs")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_7mycd")
@@ -1491,6 +1542,12 @@ layout_mode = 2
 size_flags_vertical = 4
 theme_override_fonts/font = ExtResource("20_82xsv")
 text = "PRESS Y FOR NEW GAME"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-143, 12)
+sprite_frames = SubResource("SpriteFrames_4w656")
+autoplay = "default"
+frame_progress = 0.373016
 
 [connection signal="timeout" from="Background/Critters/Timer" to="Background/Critters" method="_on_timer_timeout"]
 [connection signal="body_entered" from="Boundary/Killzone" to="." method="_on_killzone_body_entered"]
