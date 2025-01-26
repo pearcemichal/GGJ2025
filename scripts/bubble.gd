@@ -16,6 +16,9 @@ var popped : bool
 func _ready() -> void:
 
 	apply_central_impulse(random_force)
+	
+func _physics_process(delta: float) -> void:
+	sprite_2d.global_rotation = 0
 
 func set_bubble_size(factor : float):
 	collision_shape_2d.scale *= factor
