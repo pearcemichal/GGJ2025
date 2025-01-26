@@ -162,7 +162,7 @@ border_width_left = 1
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
-border_color = Color(0.332881, 0.332881, 0.33288, 1)
+border_color = Color(0.731538, 0.948205, 0.311898, 1)
 expand_margin_left = 1.0
 expand_margin_top = 1.0
 expand_margin_right = 1.0
@@ -192,20 +192,17 @@ script = ExtResource("1_onrkg")
 JUMP_VELOCITY = 100.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.5, -9.53674e-07)
+position = Vector2(-0.5, 11)
 scale = Vector2(1.395, 1.395)
 shape = SubResource("CapsuleShape2D_qhqgy")
 
 [node name="Red Sprites" type="AnimatedSprite2D" parent="."]
-visible = false
-position = Vector2(0, -12)
 sprite_frames = SubResource("SpriteFrames_smehm")
-animation = &"Walk"
+animation = &"Roll"
 autoplay = "Neutral"
 
 [node name="Blue Sprites" type="AnimatedSprite2D" parent="."]
 visible = false
-position = Vector2(0, -12)
 sprite_frames = SubResource("SpriteFrames_jej6c")
 animation = &"Walk"
 autoplay = "Neutral"

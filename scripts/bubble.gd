@@ -9,6 +9,8 @@ var random_force : Vector2
 
 var hit_counter : int = 0
 
+var popped : bool
+
 func _ready() -> void:
 
 	apply_central_impulse(random_force)
@@ -20,6 +22,7 @@ func set_bubble_size(factor : float):
 func pop_da_bubble():
 	sfx_pop.play();
 	visible = false;
+	popped = true;
 	await get_tree().create_timer(1).timeout
 	SignalBus.BubblePopped.emit()
 	queue_free()

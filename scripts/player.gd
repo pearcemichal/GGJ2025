@@ -37,6 +37,9 @@ func _ready() -> void:
 	else:
 		active_animation = blue_sprites;
 		facing_direction = 1;
+		
+	red_sprites.visible = false
+	blue_sprites.visible = false
 	
 	active_animation.visible = true;
 	set_sprite_flip();
