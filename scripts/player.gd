@@ -22,6 +22,7 @@ enum player_states { Neutral, Walk, Charge, Dive, Roll, Bubbled, BubbledCharge }
 var player_state : player_states = player_states.Neutral;
 
 var timeout : bool = false
+var wall_lock : bool = false
 
 #region Lifecycle Functions
 func _ready() -> void:
@@ -58,15 +59,26 @@ func _process(delta: float) -> void:
 			
 func _physics_process(delta: float) -> void:
 	if (!timeout):
+
 		if jump_bubble:
 			global_position = jump_bubble.global_position
 			velocity = Vector2.ZERO
-		
+			
+		if !wall_lock:
+			if is_on_wall():
+				print("AH a wall!")
+				wall_lock = true
+				for i in range(get_slide_collision_count()):
+					var wall = get_slide_collision(i)
+					velocity.x += wall.get_normal().x * 100
+				#velocity.x += 1000
+
 		move_and_slide()
 #endregion
 
 #region Enter State
 func enter_neutral_state() -> void:
+	wall_lock = false
 	player_state = player_states.Neutral;
 	active_animation.play("Neutral");
 	active_animation.rotation = 0;
@@ -166,6 +178,7 @@ func update_charge(delta: float) -> void:
 	set_sprite_flip();
 
 func update_dive(delta: float) -> void:
+	
 	if jump_bubble:
 		enter_bubbled_state();
 		return;
@@ -177,6 +190,7 @@ func update_dive(delta: float) -> void:
 	if sign(velocity.y) != -1:
 		enter_roll_state();
 		return;
+		
 	
 	#facing left
 	if facing_direction == -1:
