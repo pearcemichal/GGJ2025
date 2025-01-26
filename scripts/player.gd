@@ -21,6 +21,8 @@ var jump_charge_speed = 0.1; # default was 0.5;
 enum player_states { Neutral, Walk, Charge, Dive, Roll, Bubbled, BubbledCharge }
 var player_state : player_states = player_states.Neutral;
 
+var timeout : bool = false
+
 #region Lifecycle Functions
 func _ready() -> void:
 	jump_power.value = 0
@@ -37,28 +39,30 @@ func _ready() -> void:
 	enter_neutral_state();
 
 func _process(delta: float) -> void:
-	match(player_state):
-		player_states.Neutral:
-			update_neutral(delta);
-		player_states.Walk:
-			update_walk_state(delta);
-		player_states.Charge:
-			update_charge(delta);
-		player_states.Dive:
-			update_dive(delta);
-		player_states.Roll:
-			update_roll(delta);
-		player_states.Bubbled:
-			update_bubbled();
-		player_states.BubbledCharge:
-			update_bubbled_charge(delta);
+	if (!timeout):
+		match(player_state):
+			player_states.Neutral:
+				update_neutral(delta);
+			player_states.Walk:
+				update_walk_state(delta);
+			player_states.Charge:
+				update_charge(delta);
+			player_states.Dive:
+				update_dive(delta);
+			player_states.Roll:
+				update_roll(delta);
+			player_states.Bubbled:
+				update_bubbled();
+			player_states.BubbledCharge:
+				update_bubbled_charge(delta);
 			
 func _physics_process(delta: float) -> void:
-	if jump_bubble:
-		global_position = jump_bubble.global_position
-		velocity = Vector2.ZERO
-	
-	move_and_slide()
+	if (!timeout):
+		if jump_bubble:
+			global_position = jump_bubble.global_position
+			velocity = Vector2.ZERO
+		
+		move_and_slide()
 #endregion
 
 #region Enter State

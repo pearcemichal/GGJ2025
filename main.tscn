@@ -1,4 +1,4 @@
-[gd_scene load_steps=78 format=3 uid="uid://cyyt8eo8ch6l5"]
+[gd_scene load_steps=86 format=3 uid="uid://cyyt8eo8ch6l5"]
 
 [ext_resource type="Script" uid="uid://dmapdb801rdsa" path="res://scripts/game_manager.gd" id="1_7mycd"]
 [ext_resource type="PackedScene" uid="uid://dignp846out3w" path="res://scenes/bubbles/bubble.tscn" id="2_0xm2m"]
@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://xslr5vke8uwa" path="res://scenes/bubbles/life_bubble_p1.tscn" id="6_kek77"]
 [ext_resource type="Texture2D" uid="uid://dc5tcoagv6f8q" path="res://assets/Background/crab_joe_shack.png" id="7_getpj"]
 [ext_resource type="Texture2D" uid="uid://dporckk3vymtl" path="res://assets/Sprites/fan_sprite.png" id="9_074og"]
+[ext_resource type="Texture2D" uid="uid://c860p027swmub" path="res://assets/Background/Seaweed.png" id="9_ryguw"]
 [ext_resource type="PackedScene" uid="uid://dhtfw5dghpq1q" path="res://scenes/bubbles/loot_bubble_box.tscn" id="9_ycdy4"]
 [ext_resource type="Script" uid="uid://2sdtj4vioo1" path="res://scripts/player_ui.gd" id="10_4c57u"]
 [ext_resource type="Texture2D" uid="uid://brep1ihy2hsce" path="res://assets/Sprites/Health_Shrimp.webp" id="19_cegan"]
@@ -515,6 +516,56 @@ animations = [{
 "speed": 6.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_0rl1p"]
+atlas = ExtResource("9_ryguw")
+region = Rect2(0, 0, 44, 65)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ok6jj"]
+atlas = ExtResource("9_ryguw")
+region = Rect2(44, 0, 44, 65)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_facbu"]
+atlas = ExtResource("9_ryguw")
+region = Rect2(88, 0, 44, 65)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b1qrp"]
+atlas = ExtResource("9_ryguw")
+region = Rect2(132, 0, 44, 65)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_come4"]
+atlas = ExtResource("9_ryguw")
+region = Rect2(176, 0, 44, 65)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h8e4i"]
+atlas = ExtResource("9_ryguw")
+region = Rect2(220, 0, 44, 65)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4lmeg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0rl1p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ok6jj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_facbu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b1qrp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_come4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h8e4i")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_7dm0k"]
 normal = Vector2(0, 1)
 distance = 3.0
@@ -617,6 +668,7 @@ script = ExtResource("1_7mycd")
 zoom = Vector2(2, 2)
 
 [node name="Background" type="Node2D" parent="."]
+modulate = Color(0.432649, 0.865699, 0.977684, 1)
 
 [node name="Ocean BG" type="Sprite2D" parent="Background"]
 scale = Vector2(1.2, 1.2)
@@ -718,6 +770,29 @@ sprite_frames = SubResource("SpriteFrames_cegan")
 autoplay = "default"
 flip_h = true
 
+[node name="weeds" type="Node2D" parent="Background"]
+
+[node name="AnimatedSprite2D8" type="AnimatedSprite2D" parent="Background/weeds"]
+position = Vector2(-251.5, -23.7386)
+scale = Vector2(1.43182, 1.43182)
+sprite_frames = SubResource("SpriteFrames_4lmeg")
+autoplay = "default"
+frame_progress = 0.201249
+
+[node name="AnimatedSprite2D9" type="AnimatedSprite2D" parent="Background/weeds"]
+position = Vector2(44.625, -51.8287)
+scale = Vector2(0.880682, 0.869511)
+sprite_frames = SubResource("SpriteFrames_4lmeg")
+autoplay = "default"
+frame_progress = 0.201249
+
+[node name="AnimatedSprite2D10" type="AnimatedSprite2D" parent="Background/weeds"]
+position = Vector2(61.3125, -62.207)
+scale = Vector2(1.16761, 1.1528)
+sprite_frames = SubResource("SpriteFrames_4lmeg")
+autoplay = "default"
+frame_progress = 0.201249
+
 [node name="Ship Interior" type="Sprite2D" parent="Background"]
 scale = Vector2(1.2, 1.2)
 texture = ExtResource("3_ycdy4")
@@ -773,7 +848,66 @@ shape = SubResource("RectangleShape2D_272bh")
 [node name="Level" type="Node2D" parent="."]
 metadata/_edit_lock_ = true
 
+[node name="Details" type="Node2D" parent="Level"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Level/Details"]
+position = Vector2(235, 58)
+scale = Vector2(1.40909, 1.40909)
+sprite_frames = SubResource("SpriteFrames_4lmeg")
+autoplay = "default"
+frame_progress = 0.169456
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="Level/Details"]
+position = Vector2(199, 77.2045)
+scale = Vector2(0.818182, 0.818182)
+sprite_frames = SubResource("SpriteFrames_4lmeg")
+autoplay = "default"
+frame_progress = 0.201249
+
+[node name="AnimatedSprite2D3" type="AnimatedSprite2D" parent="Level/Details"]
+position = Vector2(108, 77.2045)
+scale = Vector2(0.818182, 0.818182)
+sprite_frames = SubResource("SpriteFrames_4lmeg")
+autoplay = "default"
+frame_progress = 0.201249
+
+[node name="AnimatedSprite2D4" type="AnimatedSprite2D" parent="Level/Details"]
+position = Vector2(92, 72.7727)
+scale = Vector2(0.954545, 0.954545)
+sprite_frames = SubResource("SpriteFrames_4lmeg")
+autoplay = "default"
+frame_progress = 0.201249
+
+[node name="AnimatedSprite2D5" type="AnimatedSprite2D" parent="Level/Details"]
+position = Vector2(-23.5, 64.6477)
+scale = Vector2(1.20455, 1.20455)
+sprite_frames = SubResource("SpriteFrames_4lmeg")
+autoplay = "default"
+frame_progress = 0.201249
+
+[node name="AnimatedSprite2D6" type="AnimatedSprite2D" parent="Level/Details"]
+position = Vector2(-114, 77.2046)
+scale = Vector2(0.818181, 0.818182)
+sprite_frames = SubResource("SpriteFrames_4lmeg")
+autoplay = "default"
+frame_progress = 0.201249
+
+[node name="AnimatedSprite2D7" type="AnimatedSprite2D" parent="Level/Details"]
+position = Vector2(-183, 77.2046)
+scale = Vector2(0.818181, 0.818182)
+sprite_frames = SubResource("SpriteFrames_4lmeg")
+autoplay = "default"
+frame_progress = 0.201249
+
+[node name="AnimatedSprite2D8" type="AnimatedSprite2D" parent="Level/Details"]
+position = Vector2(-199.5, 57.2614)
+scale = Vector2(1.43182, 1.43182)
+sprite_frames = SubResource("SpriteFrames_4lmeg")
+autoplay = "default"
+frame_progress = 0.201249
+
 [node name="Fans" type="Node2D" parent="Level"]
+metadata/_edit_lock_ = true
 
 [node name="Wind Center" type="Area2D" parent="Level/Fans"]
 position = Vector2(-10, 89)
@@ -884,6 +1018,7 @@ texture = ExtResource("9_074og")
 
 [node name="Platforms" type="Node2D" parent="Level"]
 position = Vector2(0, -1)
+metadata/_edit_lock_ = true
 
 [node name="Platform" type="StaticBody2D" parent="Level/Platforms"]
 position = Vector2(-191, -37)
@@ -963,6 +1098,8 @@ metadata/_edit_group_ = true
 
 [node name="Player" parent="P1 Spawn" instance=ExtResource("5_lquwl")]
 
+[node name="Timer" type="Timer" parent="P1 Spawn"]
+
 [node name="P2 Spawn" type="Node2D" parent="."]
 position = Vector2(183.615, -69.34)
 metadata/_edit_group_ = true
@@ -970,6 +1107,8 @@ metadata/_edit_group_ = true
 [node name="Player" parent="P2 Spawn" instance=ExtResource("5_lquwl")]
 collision_layer = 2
 player_id = 1
+
+[node name="Timer" type="Timer" parent="P2 Spawn"]
 
 [node name="Main Stage" type="Sprite2D" parent="."]
 scale = Vector2(1.2, 1.2)
@@ -1221,6 +1360,7 @@ stretch_mode = 3
 
 [node name="VictoryScreen" type="Panel" parent="."]
 unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(10, 10)
 anchors_preset = 8
 anchor_left = 0.5
