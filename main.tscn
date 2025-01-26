@@ -1223,7 +1223,7 @@ wait_time = 0.5
 autostart = true
 
 [node name="P1 Spawn" type="Node2D" parent="."]
-position = Vector2(-191.44, -79.36)
+position = Vector2(-210.44, -79.36)
 metadata/_edit_group_ = true
 
 [node name="Player" parent="P1 Spawn" instance=ExtResource("5_lquwl")]
@@ -1231,7 +1231,7 @@ metadata/_edit_group_ = true
 [node name="Timer" type="Timer" parent="P1 Spawn"]
 
 [node name="P2 Spawn" type="Node2D" parent="."]
-position = Vector2(183.615, -79.34)
+position = Vector2(-162.83, -79.34)
 metadata/_edit_group_ = true
 
 [node name="Player" parent="P2 Spawn" instance=ExtResource("5_lquwl")]

@@ -202,6 +202,8 @@ stream_2/stream = ExtResource("10_jej6c")
 stream_3/stream = ExtResource("11_f1ej7")
 
 [node name="Player" type="CharacterBody2D" groups=["players", "popper"]]
+collision_layer = 3
+collision_mask = 3
 script = ExtResource("1_onrkg")
 JUMP_VELOCITY = 100.0
 

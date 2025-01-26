@@ -39,9 +39,12 @@ func _ready() -> void:
 	box_scale = 1.395
 	
 	# set collision layers
-	#if player_id == 1: 
-		#set_collision_layer_value(1,false)
-		#set_collision_mask_value(2,false)
+	if player_id == 1: 
+		set_collision_layer_value(1,false)
+		set_collision_mask_value(1,false)
+	else:
+		set_collision_mask_value(2,false)
+		set_collision_mask_value(2,false)
 	
 	if player_id == 0:
 		active_animation = red_sprites;
