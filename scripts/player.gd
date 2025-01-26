@@ -5,6 +5,9 @@ extends CharacterBody2D
 @onready var red_sprites: AnimatedSprite2D = $"Red Sprites"
 @onready var blue_sprites: AnimatedSprite2D = $"Blue Sprites"
 
+@onready var sfx_jump: AudioStreamPlayer2D = $SFX_Jump
+
+
 @export var player_id : int
 @export var SPEED = 100.0
 @export var JUMP_VELOCITY = 150.0
@@ -109,6 +112,7 @@ func enter_dive_state() -> void:
 	jump_power_value = 0
 	jump_power.value = jump_power_value
 	set_sprite_flip();
+	sfx_jump.play()
 
 func enter_roll_state() -> void:
 	player_state = player_states.Roll;
