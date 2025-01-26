@@ -1,4 +1,4 @@
-[gd_scene load_steps=71 format=3 uid="uid://cyyt8eo8ch6l5"]
+[gd_scene load_steps=78 format=3 uid="uid://cyyt8eo8ch6l5"]
 
 [ext_resource type="Script" uid="uid://dmapdb801rdsa" path="res://scripts/game_manager.gd" id="1_7mycd"]
 [ext_resource type="PackedScene" uid="uid://dignp846out3w" path="res://scenes/bubbles/bubble.tscn" id="2_0xm2m"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://cmlwa3jf6pcur" path="res://scenes/player.tscn" id="5_lquwl"]
 [ext_resource type="Texture2D" uid="uid://d0ld1v1x67l67" path="res://assets/Background/Fish_02_Sheet.png" id="5_vivmo"]
 [ext_resource type="PackedScene" uid="uid://xslr5vke8uwa" path="res://scenes/bubbles/life_bubble_p1.tscn" id="6_kek77"]
+[ext_resource type="Texture2D" uid="uid://dc5tcoagv6f8q" path="res://assets/Background/crab_joe_shack.png" id="7_getpj"]
 [ext_resource type="Texture2D" uid="uid://dporckk3vymtl" path="res://assets/Sprites/fan_sprite.png" id="9_074og"]
 [ext_resource type="PackedScene" uid="uid://dhtfw5dghpq1q" path="res://scenes/bubbles/loot_bubble_box.tscn" id="9_ycdy4"]
 [ext_resource type="Script" uid="uid://2sdtj4vioo1" path="res://scripts/player_ui.gd" id="10_4c57u"]
@@ -111,6 +112,18 @@ tracks/5/keys = {
 "update": 0,
 "values": [Vector2(-302, -392)]
 }
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("JoeShack:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-419, -86.25)]
+}
 
 [sub_resource type="Animation" id="Animation_yaehf"]
 resource_name = "big_fishman"
@@ -202,6 +215,22 @@ tracks/0/keys = {
 "values": [Vector2(-356, 126), Vector2(-189.991, -6.907), Vector2(-151.722, 2.999), Vector2(-44.5346, -74.1214), Vector2(-14.303, -52.953), Vector2(243, -281)]
 }
 
+[sub_resource type="Animation" id="Animation_getpj"]
+resource_name = "joe_shack"
+length = 9.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("JoeShack:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(421.041, -86.25), Vector2(-419, -86.25)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2cqfq"]
 _data = {
 &"RESET": SubResource("Animation_vivmo"),
@@ -209,7 +238,8 @@ _data = {
 &"big_jellyman": SubResource("Animation_cegan"),
 &"fishman": SubResource("Animation_w48qg"),
 &"fishman_group": SubResource("Animation_074og"),
-&"jellyman": SubResource("Animation_2cqfq")
+&"jellyman": SubResource("Animation_2cqfq"),
+&"joe_shack": SubResource("Animation_getpj")
 }
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_82xsv"]
@@ -337,6 +367,42 @@ animations = [{
 "loop": true,
 "name": &"default",
 "speed": 4.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_seu75"]
+atlas = ExtResource("7_getpj")
+region = Rect2(0, 0, 118, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_htxhm"]
+atlas = ExtResource("7_getpj")
+region = Rect2(118, 0, 118, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jq2sk"]
+atlas = ExtResource("7_getpj")
+region = Rect2(236, 0, 118, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4k2k6"]
+atlas = ExtResource("7_getpj")
+region = Rect2(354, 0, 118, 37)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0rl1p"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_seu75")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_htxhm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jq2sk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4k2k6")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
 }]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_yaehf"]
@@ -595,6 +661,12 @@ sprite_frames = SubResource("SpriteFrames_2cqfq")
 autoplay = "default"
 frame = 3
 frame_progress = 0.27805
+
+[node name="JoeShack" type="AnimatedSprite2D" parent="Background/Critters"]
+position = Vector2(-419, -86.25)
+scale = Vector2(1.7973, 1.7973)
+sprite_frames = SubResource("SpriteFrames_0rl1p")
+autoplay = "default"
 
 [node name="Jellyman Group" type="Node2D" parent="Background/Critters"]
 position = Vector2(243, -281)

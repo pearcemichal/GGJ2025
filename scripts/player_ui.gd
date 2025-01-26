@@ -19,7 +19,7 @@ func _ready() -> void:
 	
 	SignalBus.PlayerTakeDamage.connect(_on_player_damaged)
 	
-	health = 2
+	#health = 2
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _on_player_damaged(id: int) -> void:
