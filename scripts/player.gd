@@ -31,6 +31,8 @@ var wall_lock : bool = false
 func _ready() -> void:
 	jump_power.value = 0
 	
+	jump_power.visible = false
+	
 	if player_id == 0:
 		active_animation = red_sprites;
 		facing_direction =-1;
@@ -90,6 +92,7 @@ func enter_neutral_state() -> void:
 	active_animation.rotation = 0;
 	velocity.x = 0;
 	velocity.y = 0;
+	jump_power.visible = false
 
 func enter_walk_state() -> void:
 	player_state = player_states.Walk;
@@ -103,6 +106,7 @@ func enter_charge_state() -> void:
 	velocity.x = 0;
 	move_dir.x = 0;
 	sfx_charge.play()
+	jump_power.visible = true
 	
 func enter_dive_state() -> void:
 	player_state = player_states.Dive;
@@ -127,6 +131,7 @@ func enter_bubbled_state() -> void:
 	player_state = player_states.Bubbled;
 	active_animation.play("Roll");
 	set_sprite_flip();
+	jump_power.visible = false
 	
 func enter_bubbled_charge_state() -> void:
 	player_state = player_states.BubbledCharge;
@@ -134,6 +139,7 @@ func enter_bubbled_charge_state() -> void:
 	jump_power_value = 0;
 	velocity.x = 0;
 	move_dir.x = 0;
+	jump_power.visible = true
 #endregion
 
 #region Update State

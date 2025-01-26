@@ -1,4 +1,4 @@
-[gd_scene load_steps=86 format=3 uid="uid://cyyt8eo8ch6l5"]
+[gd_scene load_steps=87 format=3 uid="uid://cyyt8eo8ch6l5"]
 
 [ext_resource type="Script" uid="uid://dmapdb801rdsa" path="res://scripts/game_manager.gd" id="1_7mycd"]
 [ext_resource type="PackedScene" uid="uid://dignp846out3w" path="res://scenes/bubbles/bubble.tscn" id="2_0xm2m"]
@@ -632,6 +632,9 @@ region = Rect2(0, 0, 64, 64)
 atlas = ExtResource("19_cegan")
 region = Rect2(64, 0, 64, 64)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ryguw"]
+bg_color = Color(0, 0, 0, 0)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_qsp4k"]
 atlas = ExtResource("19_cegan")
 region = Rect2(128, 0, 64, 64)
@@ -1251,6 +1254,7 @@ stretch_mode = 3
 [node name="_spacer" type="Panel" parent="UI/HBox"]
 custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ryguw")
 
 [node name="LifeP1" type="Control" parent="UI/HBox"]
 layout_mode = 2

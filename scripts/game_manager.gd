@@ -29,4 +29,4 @@ func _on_killzone_body_entered(body: Node2D) -> void:
 		
 func _on_player_krill(player_id : int):
 	victory_screen.visible = true
-	end_message.text = "Player %s has been Krilled" % player_id 
+	end_message.text = "Player %s has been Krilled" % str(player_id + 1)
