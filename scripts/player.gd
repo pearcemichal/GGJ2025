@@ -79,7 +79,6 @@ func _physics_process(delta: float) -> void:
 			
 		if !wall_lock:
 			if is_on_wall():
-				print("AH a wall!")
 				wall_lock = true
 				for i in range(get_slide_collision_count()):
 					var wall = get_slide_collision(i)
