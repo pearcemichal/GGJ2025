@@ -8,9 +8,7 @@ extends RigidBody2D
 @onready var sfx_pop: AudioStreamPlayer2D = $SFX_Pop
 
 var random_force : Vector2
-
 var hit_counter : int = 0
-
 var popped : bool
 
 func _ready() -> void:

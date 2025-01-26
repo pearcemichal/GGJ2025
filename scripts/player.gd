@@ -4,6 +4,8 @@ extends CharacterBody2D
 @onready var jump_power: ProgressBar = $JumpPower
 @onready var red_sprites: AnimatedSprite2D = $"Red Sprites"
 @onready var blue_sprites: AnimatedSprite2D = $"Blue Sprites"
+@onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
+
 
 @onready var sfx_jump: AudioStreamPlayer2D = $SFX_Jump
 @onready var sfx_charge: AudioStreamPlayer2D = $SFX_charge
@@ -27,11 +29,14 @@ var player_state : player_states = player_states.Neutral;
 var timeout : bool = false
 var wall_lock : bool = false
 
+var box_scale : float
+
 #region Lifecycle Functions
 func _ready() -> void:
 	jump_power.value = 0
 	
 	jump_power.visible = false
+	box_scale = 1.395
 	
 	if player_id == 0:
 		active_animation = red_sprites;
@@ -122,6 +127,7 @@ func enter_dive_state() -> void:
 	jump_power.value = jump_power_value
 	set_sprite_flip();
 	sfx_jump.play()
+	collision_shape_2d.scale = Vector2(box_scale,box_scale)
 
 func enter_roll_state() -> void:
 	player_state = player_states.Roll;
@@ -132,6 +138,9 @@ func enter_bubbled_state() -> void:
 	active_animation.play("Roll");
 	set_sprite_flip();
 	jump_power.visible = false
+	collision_shape_2d.scale = Vector2(0.25,0.25)
+	
+	
 	
 func enter_bubbled_charge_state() -> void:
 	player_state = player_states.BubbledCharge;
@@ -261,4 +270,6 @@ func apply_gravity(delta: float) -> void:
 	velocity.y += get_gravity().y * delta;
 
 func reset_state() -> void:
+	jump_bubble = null
+	collision_shape_2d.scale = Vector2(box_scale,box_scale)
 	enter_neutral_state();

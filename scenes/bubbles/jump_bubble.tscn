@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://goffmnls2sjg"]
+[gd_scene load_steps=10 format=3 uid="uid://goffmnls2sjg"]
 
 [ext_resource type="Script" uid="uid://d3gyddbbyaodd" path="res://scripts/bubble_jump.gd" id="1_vw288"]
 [ext_resource type="AudioStream" uid="uid://dlrxrj05d0shd" path="res://assets/Audio/SFX/ESM_Bubble_Pop_Shoot_v2_Game_Organic_Cartoon.wav" id="2_7vm7y"]
+[ext_resource type="Texture2D" uid="uid://p450lm747dy1" path="res://assets/Sprites/clam_shell3.png" id="3_3tn2h"]
 [ext_resource type="Texture2D" uid="uid://b4sjgrkxn3k1q" path="res://assets/bubble_texture.png" id="3_vcdg7"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_n2mqj"]
@@ -11,7 +12,7 @@ bounce = 0.14
 [sub_resource type="CircleShape2D" id="CircleShape2D_ig7tw"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_n2mqj"]
-radius = 17.1172
+radius = 11.1803
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_vcdg7"]
 random_pitch = 1.5
@@ -67,6 +68,10 @@ pivot_offset = Vector2(10, 10)
 theme_override_styles/panel = SubResource("StyleBoxFlat_vw288")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.53125, 0.53125)
+texture = ExtResource("3_3tn2h")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
 scale = Vector2(0.53125, 0.53125)
 texture = ExtResource("3_vcdg7")
 
