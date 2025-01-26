@@ -12,7 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://cxbny5atsv1m7" path="res://assets/Background/Fight_Glub_11.webp" id="4_vivmo"]
 [ext_resource type="PackedScene" uid="uid://dvfbvbqrvwhrk" path="res://scenes/bubbles/life_bubble_p0.tscn" id="5_5vw27"]
 [ext_resource type="PackedScene" uid="uid://cmlwa3jf6pcur" path="res://scenes/player.tscn" id="5_lquwl"]
-[ext_resource type="Script" path="res://scripts/critter_manager.gd" id="5_lswn8"]
+[ext_resource type="Script" uid="uid://b6def14nhylop" path="res://scripts/critter_manager.gd" id="5_lswn8"]
 [ext_resource type="Texture2D" uid="uid://d0ld1v1x67l67" path="res://assets/Background/Fish_02_Sheet.png" id="5_vivmo"]
 [ext_resource type="PackedScene" uid="uid://xslr5vke8uwa" path="res://scenes/bubbles/life_bubble_p1.tscn" id="6_kek77"]
 [ext_resource type="Texture2D" uid="uid://dc5tcoagv6f8q" path="res://assets/Background/crab_joe_shack.png" id="7_getpj"]
@@ -1235,7 +1235,6 @@ position = Vector2(183.615, -79.34)
 metadata/_edit_group_ = true
 
 [node name="Player" parent="P2 Spawn" instance=ExtResource("5_lquwl")]
-collision_layer = 2
 player_id = 1
 
 [node name="Timer" type="Timer" parent="P2 Spawn"]

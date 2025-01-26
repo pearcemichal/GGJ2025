@@ -2,11 +2,12 @@ extends Node2D
 
 @onready var victory_screen: Panel = %VictoryScreen
 @onready var end_message: Label = %EndMessage
-@onready var respawn_timer: Timer = $RespawnTimer
 
 @export var splash_object : PackedScene; 
 
 var respawning_player : Player
+
+var fullscreen_toggle : bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -17,6 +18,11 @@ func _ready() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("restart"): get_tree().reload_current_scene();
 	if event.is_action_pressed("quit"): get_tree().quit()
+	if event.is_action_pressed("fullscreen"):
+		if fullscreen_toggle: DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED) 
+		else: DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN) 
+		fullscreen_toggle = !fullscreen_toggle
+			
 		
 
 func _on_killzone_body_entered(body: Node2D) -> void:
@@ -35,4 +41,8 @@ func _on_killzone_body_entered(body: Node2D) -> void:
 		
 func _on_player_krill(player_id : int):
 	victory_screen.visible = true
-	end_message.text = "Player %s has been Krilled" % str(player_id + 1)
+	var player_string : String
+	if player_id == 0: player_string = "Red"
+	else: player_string = "Blue"
+	
+	end_message.text = "Player %s has been Krilled" % player_string

@@ -38,6 +38,11 @@ func _ready() -> void:
 	jump_power.visible = false
 	box_scale = 1.395
 	
+	# set collision layers
+	#if player_id == 1: 
+		#set_collision_layer_value(1,false)
+		#set_collision_mask_value(2,false)
+	
 	if player_id == 0:
 		active_animation = red_sprites;
 		facing_direction =-1;

@@ -42,7 +42,7 @@ func spawn_bubble(obj : PackedScene):
 		return;
 	
 	var bubble = obj.instantiate() as Bubble
-	bubble.name = obj.resource_name
+	#bubble.name = obj.resource_name
 	bubble.random_force = Vector2(randi_range(-20,20),randi_range(-20,20))
 	
 	add_child(bubble)
