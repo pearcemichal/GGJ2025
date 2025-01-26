@@ -7,13 +7,18 @@
 friction = 0.01
 bounce = 0.14
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_ig7tw"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_n2mqj"]
+radius = 17.1172
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vw288"]
-bg_color = Color(0.152941, 0.152941, 0.152941, 0.384314)
+bg_color = Color(0.329412, 0.262745, 0.0784314, 0.458824)
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
-border_color = Color(0.898039, 0.513726, 0.14902, 0.831373)
+border_color = Color(0.984314, 0.627451, 0, 0.913725)
 border_blend = true
 corner_radius_top_left = 9
 corner_radius_top_right = 9
@@ -41,15 +46,6 @@ linear_damp = 0.5
 script = ExtResource("1_vw288")
 metadata/_edit_group_ = true
 
-[node name="Panel" type="Panel" parent="."]
-offset_left = -10.0
-offset_top = -10.0
-offset_right = 10.0
-offset_bottom = 10.0
-scale = Vector2(1.5, 1.5)
-pivot_offset = Vector2(10, 10)
-theme_override_styles/panel = SubResource("StyleBoxFlat_vw288")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(1.5, 1.5)
 shape = SubResource("CircleShape2D_ig7tw")
@@ -62,6 +58,14 @@ shape = SubResource("CircleShape2D_n2mqj")
 
 [node name="SFX_Pop" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_vcdg7")
+[node name="Panel" type="Panel" parent="."]
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+scale = Vector2(1.5, 1.5)
+pivot_offset = Vector2(10, 10)
+theme_override_styles/panel = SubResource("StyleBoxFlat_vw288")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
