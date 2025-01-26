@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://cmlwa3jf6pcur"]
+[gd_scene load_steps=33 format=3 uid="uid://cmlwa3jf6pcur"]
 
 [ext_resource type="Script" uid="uid://lbwmj3d78ybe" path="res://scripts/player.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://5cxcy7wsm3iy" path="res://assets/Sprites/Player Sprites/RED.png" id="2_g2els"]
@@ -32,13 +32,21 @@ region = Rect2(0, 0, 64, 64)
 atlas = ExtResource("2_g2els")
 region = Rect2(192, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_qhqgy"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_oprun"]
 atlas = ExtResource("2_g2els")
 region = Rect2(256, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_smehm"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_a8ls1"]
 atlas = ExtResource("2_g2els")
 region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qfm1y"]
+atlas = ExtResource("2_g2els")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fulsm"]
+atlas = ExtResource("2_g2els")
+region = Rect2(448, 0, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_smehm"]
 animations = [{
@@ -76,10 +84,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_qhqgy")
+"texture": SubResource("AtlasTexture_oprun")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_smehm")
+"texture": SubResource("AtlasTexture_a8ls1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qfm1y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fulsm")
 }],
 "loop": true,
 "name": &"Walk",
@@ -198,7 +212,7 @@ shape = SubResource("CapsuleShape2D_qhqgy")
 
 [node name="Red Sprites" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_smehm")
-animation = &"Roll"
+animation = &"Walk"
 autoplay = "Neutral"
 
 [node name="Blue Sprites" type="AnimatedSprite2D" parent="."]
