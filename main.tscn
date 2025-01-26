@@ -10,7 +10,6 @@
 [ext_resource type="Texture2D" uid="uid://bulyagxqyyk65" path="res://assets/Sprites/BG Ship Interior.png" id="3_ycdy4"]
 [ext_resource type="PackedScene" uid="uid://goffmnls2sjg" path="res://scenes/bubbles/jump_bubble.tscn" id="4_7mycd"]
 [ext_resource type="Texture2D" uid="uid://cxbny5atsv1m7" path="res://assets/Background/Fight_Glub_11.webp" id="4_vivmo"]
-[ext_resource type="Texture2D" uid="uid://cc8ng7ejyhbpo" path="res://assets/Sprites/Main Stage.png" id="4_w48qg"]
 [ext_resource type="PackedScene" uid="uid://dvfbvbqrvwhrk" path="res://scenes/bubbles/life_bubble_p0.tscn" id="5_5vw27"]
 [ext_resource type="PackedScene" uid="uid://cmlwa3jf6pcur" path="res://scenes/player.tscn" id="5_lquwl"]
 [ext_resource type="Texture2D" uid="uid://d0ld1v1x67l67" path="res://assets/Background/Fish_02_Sheet.png" id="5_vivmo"]
@@ -21,7 +20,10 @@
 [ext_resource type="PackedScene" uid="uid://dhtfw5dghpq1q" path="res://scenes/bubbles/loot_bubble_box.tscn" id="9_ycdy4"]
 [ext_resource type="Script" uid="uid://2sdtj4vioo1" path="res://scripts/player_ui.gd" id="10_4c57u"]
 [ext_resource type="Texture2D" uid="uid://brep1ihy2hsce" path="res://assets/Sprites/Health_Shrimp.webp" id="19_cegan"]
+[ext_resource type="Texture2D" uid="uid://q0ll3bwi7buw" path="res://assets/Sprites/Bottom Water.png" id="19_d13ii"]
+[ext_resource type="Texture2D" uid="uid://rgbqe6uaoyxg" path="res://assets/Sprites/platforms.png" id="20_1u8w0"]
 [ext_resource type="FontFile" uid="uid://d0dx4obxytsvf" path="res://assets/Fonts/Sauce Barbe.otf" id="20_82xsv"]
+[ext_resource type="Texture2D" uid="uid://dwr6l2b0s75qk" path="res://assets/Sprites/Outer Frame.png" id="21_0odxb"]
 
 [sub_resource type="Curve" id="Curve_074og"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.345178, 0.191011), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -624,6 +626,70 @@ size = Vector2(77, 19)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kek77"]
 size = Vector2(57, 19)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_4lmeg"]
+atlas = ExtResource("19_d13ii")
+region = Rect2(0, 0, 480, 270)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0cp0l"]
+atlas = ExtResource("19_d13ii")
+region = Rect2(480, 0, 480, 270)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d2t1y"]
+atlas = ExtResource("19_d13ii")
+region = Rect2(960, 0, 480, 270)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gngh3"]
+atlas = ExtResource("19_d13ii")
+region = Rect2(1440, 0, 480, 270)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0n3wm"]
+atlas = ExtResource("19_d13ii")
+region = Rect2(1920, 0, 480, 270)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qnost"]
+atlas = ExtResource("19_d13ii")
+region = Rect2(2400, 0, 480, 270)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wnkbs"]
+atlas = ExtResource("19_d13ii")
+region = Rect2(2880, 0, 480, 270)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f6a44"]
+atlas = ExtResource("19_d13ii")
+region = Rect2(3360, 0, 480, 270)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0cbny"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4lmeg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0cp0l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d2t1y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gngh3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0n3wm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qnost")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wnkbs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f6a44")
+}],
+"loop": true,
+"name": &"default",
+"speed": 15.0
+}]
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_48xfa"]
 atlas = ExtResource("19_cegan")
 region = Rect2(0, 0, 64, 64)
@@ -1113,9 +1179,19 @@ player_id = 1
 
 [node name="Timer" type="Timer" parent="P2 Spawn"]
 
-[node name="Main Stage" type="Sprite2D" parent="."]
+[node name="Platforms" type="Sprite2D" parent="."]
 scale = Vector2(1.2, 1.2)
-texture = ExtResource("4_w48qg")
+texture = ExtResource("20_1u8w0")
+metadata/_edit_lock_ = true
+
+[node name="Bottom Water (Yum Yum)" type="AnimatedSprite2D" parent="."]
+scale = Vector2(1.2, 1.2)
+sprite_frames = SubResource("SpriteFrames_0cbny")
+autoplay = "default"
+
+[node name="Outer Frame" type="Sprite2D" parent="."]
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("21_0odxb")
 metadata/_edit_lock_ = true
 
 [node name="UI" type="Control" parent="."]
