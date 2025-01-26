@@ -1,10 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://dvfbvbqrvwhrk"]
+[gd_scene load_steps=8 format=3 uid="uid://dvfbvbqrvwhrk"]
 
 [ext_resource type="Script" uid="uid://bifbjsboyw5o0" path="res://scripts/bubble_life.gd" id="1_xmp06"]
+[ext_resource type="Texture2D" uid="uid://brep1ihy2hsce" path="res://assets/Sprites/Health_Shrimp.webp" id="2_u22fb"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_n2mqj"]
 friction = 0.01
 bounce = 0.14
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ig7tw"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_n2mqj"]
+radius = 10.198
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u22fb"]
 bg_color = Color(0.415686, 0.0784314, 0.0784314, 0.713726)
@@ -19,10 +25,9 @@ corner_radius_top_right = 9
 corner_radius_bottom_right = 9
 corner_radius_bottom_left = 9
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_ig7tw"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_n2mqj"]
-radius = 10.198
+[sub_resource type="AtlasTexture" id="AtlasTexture_qebab"]
+atlas = ExtResource("2_u22fb")
+region = Rect2(0, 0, 64, 64)
 
 [node name="BubbleLifeP0" type="RigidBody2D"]
 collision_layer = 256
@@ -35,14 +40,6 @@ linear_damp = 0.5
 script = ExtResource("1_xmp06")
 metadata/_edit_group_ = true
 
-[node name="Panel" type="Panel" parent="."]
-offset_left = -10.0
-offset_top = -10.0
-offset_right = 10.0
-offset_bottom = 10.0
-pivot_offset = Vector2(10, 10)
-theme_override_styles/panel = SubResource("StyleBoxFlat_u22fb")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_ig7tw")
 
@@ -51,6 +48,18 @@ shape = SubResource("CircleShape2D_ig7tw")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 rotation = -0.155574
 shape = SubResource("CircleShape2D_n2mqj")
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+pivot_offset = Vector2(10, 10)
+theme_override_styles/panel = SubResource("StyleBoxFlat_u22fb")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.34375, 0.34375)
+texture = SubResource("AtlasTexture_qebab")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
